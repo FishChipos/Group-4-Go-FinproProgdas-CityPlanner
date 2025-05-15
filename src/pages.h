@@ -1,6 +1,6 @@
 #ifndef PAGES_H
 #define PAGES_H
 
-void displayMainPage();
+void mainPage();
 
 #endif

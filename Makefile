@@ -4,7 +4,8 @@ LDFLAGS = -lncurses -lncursesw -DNCURSES_STATIC
 
 SOURCES = \
 	main.c \
-	pages.c
+	pages.c \
+	window.c
 
 OBJECTS = $(foreach OBJECT,$(SOURCES:.c=.o),build/$(OBJECT))
 

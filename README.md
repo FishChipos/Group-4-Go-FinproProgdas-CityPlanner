@@ -1,5 +1,4 @@
 # City Planner
----
 
 Group 4's final project submission for Pemrograman Dasar.
 
@@ -10,12 +9,11 @@ Group 4's final project submission for Pemrograman Dasar.
 3. Muhammad Dhiya'ulhaq
 4. Sakabudi Muhammad
 
-### Running the Project
----
+## Running the Project
 
-#### Project Dependencies
+### Project Dependencies
 
-This project requires ncurses and GNU make.
+This project requires ncurses (for the terminal UI) and GNU make (to compile the project).
 
 If you are using MSYS2, simply open the MSYS2 terminal and type:
 
@@ -31,7 +29,7 @@ pacman -S ncurses
 
 to install ncurses.
 
-#### Building the Project
+### Building the Project
 
 Either copy the project files, or do:
 

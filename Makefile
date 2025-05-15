@@ -1,6 +1,6 @@
 CC = gcc
-CFLAGS = -std=c99 -Isrc -Wall -Wextra
-LDFLAGS = -lncurses
+CFLAGS = -Isrc -Wall -Wextra
+LDFLAGS = -lncurses -lncursesw -DNCURSES_STATIC
 
 SOURCES = main.c
 

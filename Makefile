@@ -2,7 +2,9 @@ CC = gcc
 CFLAGS = -Isrc -Wall -Wextra
 LDFLAGS = -lncurses -lncursesw -DNCURSES_STATIC
 
-SOURCES = main.c
+SOURCES = \
+	main.c \
+	pages.c
 
 OBJECTS = $(foreach OBJECT,$(SOURCES:.c=.o),build/$(OBJECT))
 

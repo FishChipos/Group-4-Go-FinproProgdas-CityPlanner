@@ -3,6 +3,10 @@
 
 int main() {
     initscr();
+    noecho();
+    cbreak();
+    keypad(stdscr, TRUE);
+
     printw("Hello world!");
     refresh();
     getch();

@@ -5,7 +5,7 @@ WINDOW *createWindow(WindowConfig config) {
 
     window = newwin(config.dimensions.height, config.dimensions.width, config.padding.top, config.padding.left);
 
-    init_pair(1, COLOR_RED, COLOR_BLACK);
+    init_pair(1, config.borderColor, COLOR_BLACK);
 
     wattron(window, COLOR_PAIR(1));
     box(window, 0, 0);

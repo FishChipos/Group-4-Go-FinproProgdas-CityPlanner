@@ -4,6 +4,26 @@
 
 #include "window.h"
 
+void infoPage(TerminalFlags flags) {
+    if (flags != 0) {
+        printw("CITY PLANNER\n");
+
+        if (flags & FLAG_COLOR_UNSUPPORTED) {
+            printw("INFO: Color is not supported on this terminal.\n");
+        }
+        
+        if (flags & FLAG_COLOR_FIXED) {
+            printw("INFO: Color definitions are fixed on this terminal.\n");
+        }
+
+        printw("Press anything to continue.");
+
+        refresh();
+
+        getch();
+    }   
+}
+
 void mainPage() {
     typedef enum {
         CHOICE_START = 0,

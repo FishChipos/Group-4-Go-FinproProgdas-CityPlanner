@@ -15,32 +15,20 @@ int main() {
     keypad(stdscr, TRUE);
     curs_set(CURSOR_INVISIBLE);
 
-    bool showInfoPage = FALSE;
+    TerminalFlags flags = 0;
 
-    // Info messages for color-related terminal stuff.
     if (!has_colors()) {
-        printw("INFO: Terminal does not support color.\n");
-        showInfoPage = TRUE;
+        flags |= FLAG_COLOR_UNSUPPORTED;
     }
     else {
         start_color();
     }
+    
+    if (!can_change_color()) flags |= FLAG_COLOR_FIXED;
 
-    if (!can_change_color()) {
-        printw("INFO: Terminal cannot change color definitions.\n");
-        showInfoPage = TRUE;
-    }
+    infoPage(flags);
 
-    if (showInfoPage) {
-        printw("Press anything to continue.");
-
-        refresh();
-
-        getch();
-
-        clear();
-    }
-
+    clear();
     refresh();
 
     mainPage();

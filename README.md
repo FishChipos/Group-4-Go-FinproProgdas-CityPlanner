@@ -9,17 +9,17 @@ Group 4's final project submission for Pemrograman Dasar.
 3. Muhammad Dhiya'ulhaq
 4. Sakabudi Muhammad
 
-## Running the Project
+## Building the Project
 
 ### Project Dependencies
 
-This project requires ncurses (for the terminal UI) and GNU make (to build the project).
+This project requires ncurses (for the terminal UI) and make (to build the project).
 
-It is recommended to use the MSYS2 MinGW64-w64 installation for the gcc compiler.
+It is recommended to use the MSYS2 MinGW-w64 installation for the gcc compiler.
 
-#### GNU Make
+#### Make
 
-If you installed the MinGW64-w64 toolchain, you should already have make.
+If you installed the MinGW-w64 toolchain, you should already have make.
 
 Otherwise, install make by typing the following in an MSYS terminal:
 
@@ -39,7 +39,7 @@ pacman -S mingw-w64-ucrt-x86_64-ncurses
 
 For other installations install the appropriate version of ncurses.
 
-### Building the Project
+### Compiling and Running the Project
 
 Either copy the project files, or do:
 
@@ -50,7 +50,13 @@ git clone https://github.com/FishChipos/Group-4-Go-FinproProgdas-CityPlanner.git
 Navigate into the new directory and type:
 
 ```bash
+make
+```
+
+to compile and:
+
+```bash
 make run
 ```
 
-to compile and run the project.
+to compile (if not already compiled) and run the project.

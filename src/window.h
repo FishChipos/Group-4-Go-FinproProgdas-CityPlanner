@@ -1,3 +1,7 @@
+/*
+Utility functions for window-related stuff.
+*/
+
 #ifndef WINDOW_H
 #define WINDOW_H
 

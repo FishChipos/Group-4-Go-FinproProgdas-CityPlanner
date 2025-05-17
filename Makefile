@@ -1,6 +1,7 @@
 CC = gcc
-CFLAGS = -Isrc -Wall -Wextra
+CFLAGS = -Isrc -Wall -Wextra -foptimize-sibling-calls
 LDFLAGS = -lncurses -lncursesw -DNCURSES_STATIC
+DEBUGFLAGS = -g
 
 SOURCES = \
 	main.c \
@@ -14,13 +15,13 @@ TARGET = main.exe
 all: build/$(TARGET)
 
 build/$(TARGET): build $(OBJECTS)
-	$(CC) $(OBJECTS) -o $@ $(LDFLAGS)
+	$(CC) $(OBJECTS) -o $@ $(LDFLAGS) $(DEBUGFLAGS)
 
 build:
 	mkdir -p build
 
 $(OBJECTS): build/%.o: src/%.c
-	$(CC) $< -o $@ -c $(CFLAGS)
+	$(CC) $< -o $@ -c $(CFLAGS) $(DEBUGFLAGS)
 
 run: build/$(TARGET)
 	$<

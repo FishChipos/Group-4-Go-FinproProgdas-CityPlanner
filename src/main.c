@@ -3,6 +3,8 @@
 #include <ncurses/ncurses.h>
 
 #include "pages.h"
+#include "settings.h"
+#include "window.h"
 
 #define CURSOR_INVISIBLE 0
 
@@ -15,23 +17,25 @@ int main() {
     keypad(stdscr, TRUE);
     curs_set(CURSOR_INVISIBLE);
 
-    TerminalFlags flags = 0;
+    // Initialize structs.
+    TerminalFlags terminalFlags = 0;
+    Settings settings;
 
     if (!has_colors()) {
-        flags |= FLAG_COLOR_UNSUPPORTED;
+        terminalFlags |= FLAG_TERMINAL_COLOR_UNSUPPORTED;
     }
     else {
         start_color();
     }
-    
-    if (!can_change_color()) flags |= FLAG_COLOR_FIXED;
 
-    infoPage(flags);
+    if (!can_change_color()) terminalFlags |= FLAG_TERMINAL_COLOR_FIXED;
+
+    infoPage(&settings, &terminalFlags);
 
     clear();
     refresh();
 
-    mainPage();
+    startMenuPage(&settings);
 
     endwin();
 

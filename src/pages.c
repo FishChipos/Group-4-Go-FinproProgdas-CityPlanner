@@ -4,19 +4,19 @@
 
 #include "window.h"
 
-void infoPage(TerminalFlags flags) {
-    if (flags != 0) {
-        printw("CITY PLANNER\n");
+void infoPage(Settings *settings, TerminalFlags *flags) {
+    if (*flags != 0) {
+        printw("CITY PLANNER\n\n");
 
-        if (flags & FLAG_COLOR_UNSUPPORTED) {
+        if (*flags & FLAG_TERMINAL_COLOR_UNSUPPORTED) {
             printw("INFO: Color is not supported on this terminal.\n");
         }
         
-        if (flags & FLAG_COLOR_FIXED) {
+        if (*flags & FLAG_TERMINAL_COLOR_FIXED) {
             printw("INFO: Color definitions are fixed on this terminal.\n");
         }
 
-        printw("Press anything to continue.");
+        printw("\nPress anything to continue.");
 
         refresh();
 
@@ -24,16 +24,17 @@ void infoPage(TerminalFlags flags) {
     }   
 }
 
-void mainPage() {
+void startMenuPage(Settings *settings) {
     typedef enum {
         CHOICE_START = 0,
+        CHOICE_SETTINGS,
         CHOICE_EXIT
     } CHOICE;
 
     const WindowConfig config = {
         .dimensions = {
-            .height = 12,
-            .width = 40
+            .height = 18,
+            .width = 60
         },
         .padding = {
             .top = 1,
@@ -73,14 +74,8 @@ void mainPage() {
         }
         // Enter key.
         else if (c == '\n') {
-            switch (choice) {
-                case CHOICE_START:
-                    break;
-
-                case CHOICE_EXIT:
-                    windowShouldClose = TRUE;
-                    break;
-            }
+            // Move to other pages.
+            
         }
 
         // Print a cursor for the selected choice.
@@ -92,4 +87,8 @@ void mainPage() {
     } while (!windowShouldClose && (c = getch()));
 
     deleteWindow(window);
+}
+
+void settingsPage(Settings *settings) {
+
 }

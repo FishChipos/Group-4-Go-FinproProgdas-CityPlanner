@@ -60,24 +60,16 @@ void mainPage() {
         mvwprintw(window, 4 + choice, 4, " ");
 
         // Arrow keys emit \033, [, and then A for up arrow and B for down arrow.
-        if (c == '\033') {
-            getch();
-            c = getch();
-
-            switch (c) {
-                case 'A':
-                    if (choice == CHOICE_START) {
-                        choice = CHOICE_EXIT;
-                    }
-                    else {
-                        choice--;
-                    }
-                    break;
-
-                case 'B':
-                    choice = (choice + 1) % 2;
-                    break;
+        if (c == 'w') {
+            if (choice == CHOICE_START) {
+                choice = CHOICE_EXIT;
             }
+            else {
+                choice--;
+            }
+        }
+        else if (c == 's') {
+            choice = (choice + 1) % 2;
         }
         // Enter key.
         else if (c == '\n') {

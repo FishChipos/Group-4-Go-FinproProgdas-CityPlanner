@@ -30,7 +30,9 @@ typedef struct {
     bool shouldClose;
     TerminalFlags terminalFlags;
     Settings settings;
+
     Page page;
+
     Cities cities;
 } App;
 

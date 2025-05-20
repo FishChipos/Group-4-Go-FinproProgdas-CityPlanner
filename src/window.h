@@ -24,7 +24,7 @@ typedef struct {
 } WindowConfig;
 
 // Struct encapsulating a bordered window.
-// Has a window for the border and another window for the content.
+// Has a window for the border and another window for the content to enable persistent borders.
 typedef struct {
     WINDOW *borderWindow;
     WINDOW *contentWindow;

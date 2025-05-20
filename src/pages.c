@@ -1,3 +1,5 @@
+// TODO: Figure out scrolling.
+
 #include "pages.h"
 
 #include <ncurses/ncurses.h>
@@ -59,9 +61,10 @@ void startMenuPage(App *app) {
     int inputChar = 0;
 
     do {
+        // Clear the window.
         wclear(window);
-        // Input handling.
-        // W for up.
+
+        // Handle input.
         if (tolower(inputChar) == 'w') {
             if (choice == 0) {
                 choice = CHOICE_EXIT;
@@ -70,14 +73,10 @@ void startMenuPage(App *app) {
                 choice--;
             }
         }
-        
-        // S for down.
-        if (tolower(inputChar) == 's') {
+        else if (tolower(inputChar) == 's') {
             choice = (choice + 1) % 3;
         }
-
-        // Enter key.
-        if (inputChar == '\n') {
+        else if (inputChar == '\n' || inputChar == '\r') {
             // Move to other pages.
             switch (choice) {
                 case CHOICE_START:
@@ -95,6 +94,7 @@ void startMenuPage(App *app) {
             }
         }
 
+        // Draw the page.
         mvwaddstr(window, 2, 4, "MAIN MENU");
 
         mvwaddstr(window, 4, 6, "Start");
@@ -147,8 +147,10 @@ void citiesPage(App *app) {
     int inputChar = 0;
 
     do {
+        // Clear the window.
         wclear(window);
-        // Input handling.
+
+        // Handle input.
         if (tolower(inputChar) == 'w') {
             if (mode == MODE_DELETE) {
                 if (choice <= CHOICE_DELETE + 1) {
@@ -167,9 +169,11 @@ void citiesPage(App *app) {
                 }
             }
         }
+        else if (tolower(inputChar) == 's') {
 
-        if (tolower(inputChar) == 's') {
             if (mode == MODE_DELETE) {
+                
+                
                 if (choice >= CHOICE_DELETE + app->cities.count) {
                     choice = CHOICE_DELETE + 1;
                 }
@@ -178,11 +182,15 @@ void citiesPage(App *app) {
                 } 
             }   
             else {
-                choice = (choice + 1) % (CHOICE_DELETE + app->cities.count + 1);
+                if (choice >= CHOICE_DELETE + app->cities.count) {
+                    choice = CHOICE_BACK;
+                }
+                else {
+                    choice++;
+                }
             }
         }
-
-        if (inputChar == '\n') {
+        else if (inputChar == '\n' || inputChar == '\r') {
             if (mode == MODE_DELETE) {
                 size_t cityIndex = choice - CHOICE_DELETE - 1;
 
@@ -194,23 +202,23 @@ void citiesPage(App *app) {
                 deleteCity(&app->cities, cityIndex);
             }
             else {
-                if (choice > CHOICE_DELETE) {
-                    // Do something.
-                }
-                else {
-                    switch (choice) {
-                        case CHOICE_BACK:
-                            app->page = PAGE_START;
-                            pageShouldClose = TRUE;
-                            break;
-                        case CHOICE_ADD:
-                            createAddCity(&app->cities, "City 1");
-                            break;
-                        case CHOICE_DELETE:
-                            mode = MODE_DELETE;
-                            choice = CHOICE_DELETE + 1;
-                            break;
-                    }
+                switch (choice) {
+                    case CHOICE_BACK:
+                        app->page = PAGE_START;
+                        pageShouldClose = TRUE;
+                        break;
+                    case CHOICE_ADD:
+                        createAddCity(&app->cities, "City");
+                        snprintf(app->cities.array[app->cities.count - 1].name, 128, "City %lld", app->cities.count);
+
+                        break;
+                    case CHOICE_DELETE:
+                        mode = MODE_DELETE;
+                        choice = CHOICE_DELETE + 1;
+                        break;
+                    default:
+                        // Open a city.
+                        break;
                 }
             }
         }
@@ -220,6 +228,7 @@ void citiesPage(App *app) {
             choice = CHOICE_BACK;
         }
 
+        // Draw the page.
         mvwaddstr(window, 2, 4, "CITIES");
 
         mvwaddstr(window, 4, 6, "Back");
@@ -231,6 +240,8 @@ void citiesPage(App *app) {
         }
         else {
             for (size_t cityIndex = 0; cityIndex < app->cities.count; cityIndex++) {
+                if (cityIndex >= 4) break;
+
                 mvwprintw(window, 8 + cityIndex, 6, "%s", app->cities.array[cityIndex].name);
             }
         }
@@ -264,6 +275,10 @@ void citiesPage(App *app) {
     } while (!pageShouldClose && (inputChar = getch()));
 }
 
-void settingsPage(App *app) {
+void cityPage(City *city) {
+    // TO BE FINISHED
+}
 
+void settingsPage(App *app) {
+    // TO BE FINISHED
 }

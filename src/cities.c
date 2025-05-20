@@ -1,6 +1,7 @@
 #include "cities.h"
 
 #include <stdlib.h>
+#include <string.h>
 
 void addCity(Cities *cities, City city) {
     if (cities->capacity <= 0) {
@@ -27,10 +28,9 @@ void deleteCity(Cities *cities, size_t index) {
     }
 }
 
-void createAddCity(Cities *cities, char *name) {
-    City city = {
-        .name = name
-    };
+void createAddCity(Cities *cities, char name[128]) {
+    City city = { 0 };
+    strcpy_s(city.name, 128 * sizeof(char), name);
 
     addCity(cities, city);
 }

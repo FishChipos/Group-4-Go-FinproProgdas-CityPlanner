@@ -50,8 +50,12 @@ int main() {
                 break;
         }
 
+        // Reset the main screen.
         clear();
         refresh();
+
+        // Flush input to avoid any funny stuff.
+        fflush(stdin);
     };
 
     endwin();

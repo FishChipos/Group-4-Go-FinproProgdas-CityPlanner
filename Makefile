@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 CC = C:\\msys64\\mingw64\\bin\\gcc.exe
-CFLAGS = -Isrc -Wall -Wextra
-=======
-CC = gcc
 CFLAGS = -Isrc -Wall -Wextra -foptimize-sibling-calls
->>>>>>> bc36b09969645645485c26a660a159dc0092dd23
+
 LDFLAGS = -lncurses -lncursesw -DNCURSES_STATIC
 DEBUGFLAGS = -g
 

@@ -10,12 +10,12 @@ Functions to display pages.
 // Page functions.
 
 // Displays an info page for the flags set for the terminal.
-void infoPage(AppState *app);
+void infoPage(App *app);
 // Displays the start menu page.
-void startMenuPage(AppState *app);
+void startMenuPage(App *app);
 
-void mainPage(AppState *app);
+void mainPage(App *app);
 
-void settingsPage(AppState *app);
+void settingsPage(App *app);
 
 #endif

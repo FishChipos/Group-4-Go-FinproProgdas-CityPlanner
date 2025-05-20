@@ -23,6 +23,6 @@ typedef struct {
     TerminalFlags terminalFlags;
     Settings settings;
     Page page;
-} AppState;
+} App;
 
 #endif

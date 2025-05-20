@@ -5,7 +5,7 @@
 
 #include "window.h"
 
-void infoPage(AppState *app) {
+void infoPage(App *app) {
     if (app->terminalFlags != 0) {
         printw("CITY PLANNER\n\n");
 
@@ -27,7 +27,7 @@ void infoPage(AppState *app) {
     app->page = PAGE_START;
 }
 
-void startMenuPage(AppState *app) {
+void startMenuPage(App *app) {
     typedef enum {
         CHOICE_START = 0,
         CHOICE_SETTINGS,
@@ -108,6 +108,6 @@ void startMenuPage(AppState *app) {
     deleteWindow(window);
 }
 
-void settingsPage(AppState *app) {
+void settingsPage(App *app) {
 
 }

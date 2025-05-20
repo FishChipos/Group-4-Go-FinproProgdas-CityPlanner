@@ -21,7 +21,7 @@ int main() {
     refresh();
 
     // Initialize structs.
-    AppState app = {
+    App app = {
         .shouldClose = FALSE,
         .terminalFlags = 0,
         .page = PAGE_INFO

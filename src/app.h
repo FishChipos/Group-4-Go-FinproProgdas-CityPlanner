@@ -1,3 +1,8 @@
+/*
+Global app state.
+TODO: Implement saving and loading maybe.
+*/
+
 #ifndef APP_H
 #define APP_H
 

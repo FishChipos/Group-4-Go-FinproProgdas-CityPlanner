@@ -40,9 +40,9 @@ void startMenuPage(App *app) {
                 .height = 18,
                 .width = 60
             },
-            .padding = {
-                .top = 1,
-                .left = 4
+            .origin = {
+                .y = 1,
+                .x = 4
             },   
             .borderColor = COLOR_WHITE
         }
@@ -125,9 +125,9 @@ void citiesPage(App *app) {
                 .height = 18,
                 .width = 60
             },
-            .padding = {
-                .top = 1,
-                .left = 4
+            .origin = {
+                .y = 1,
+                .x = 4
             },
             .borderColor = COLOR_WHITE
         }

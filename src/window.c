@@ -5,8 +5,8 @@ void createBorderedWindow(BorderedWindow *window) {
     WINDOW **borderWindow = &window->borderWindow;
     WINDOW **contentWindow = &window->contentWindow;
 
-    *borderWindow = newwin(window->config.dimensions.height, window->config.dimensions.width, window->config.padding.top, window->config.padding.left);
-    *contentWindow = newwin(window->config.dimensions.height - 2, window->config.dimensions.width - 2, window->config.padding.top + 1, window->config.padding.left + 1);
+    *borderWindow = newwin(window->config.dimensions.height, window->config.dimensions.width, window->config.origin.y, window->config.origin.x);
+    *contentWindow = newwin(window->config.dimensions.height - 2, window->config.dimensions.width - 2, window->config.origin.y + 1, window->config.origin.x + 1);
 
     init_pair(1, window->config.borderColor, COLOR_BLACK);
 

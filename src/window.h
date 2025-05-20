@@ -7,6 +7,7 @@ Utility functions for window-related stuff.
 
 #include <ncurses/ncurses.h>
 
+// Struct containing configuration options for a window.
 typedef struct {
     struct {
         int height;
@@ -14,16 +15,16 @@ typedef struct {
     } dimensions;
     
     struct {
-        int top;
-        int left;
-    } padding;
+        int y;
+        int x;
+    } origin;
 
     int textColor;
     int borderColor;
-
 } WindowConfig;
 
-// Struct containing configuration options for a window.
+// Struct encapsulating a bordered window.
+// Has a window for the border and another window for the content.
 typedef struct {
     WINDOW *borderWindow;
     WINDOW *contentWindow;
@@ -31,9 +32,9 @@ typedef struct {
     WindowConfig config;
 } BorderedWindow;
 
-// Creates a window with default border.
+// Creates a bordered window.
 void createBorderedWindow(BorderedWindow *window);
-// Deletes a window and removes the border.
+// Deletes a bordered window.
 void deleteBorderedWindow(BorderedWindow *window);
 
 #endif

@@ -6,7 +6,8 @@ DEBUGFLAGS = -g
 SOURCES = \
 	main.c \
 	pages.c \
-	window.c
+	window.c \
+	cities.c
 
 OBJECTS = $(foreach OBJECT,$(SOURCES:.c=.o),build/$(OBJECT))
 

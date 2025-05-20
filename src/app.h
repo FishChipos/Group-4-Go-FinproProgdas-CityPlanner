@@ -8,6 +8,8 @@ TODO: Implement saving and loading maybe.
 
 #include <ncurses/ncurses.h>
 
+#include "cities.h"
+
 typedef struct {
     bool colorEnabled;
 } Settings;
@@ -23,16 +25,6 @@ typedef enum {
     PAGE_CITIES,
     PAGE_SETTINGS,
 } Page;
-
-typedef struct {
-    char *name;
-} City;
-
-typedef struct {
-    City *array;
-    size_t count;
-    size_t capacity;
-} Cities;
 
 typedef struct {
     bool shouldClose;

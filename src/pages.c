@@ -3,7 +3,9 @@
 #include <ncurses/ncurses.h>
 #include <ctype.h>
 
+#include "cities.h"
 #include "window.h"
+#include "app.h"
 
 void infoPage(App *app) {
     if (app->terminalFlags != 0) {
@@ -28,12 +30,6 @@ void infoPage(App *app) {
 }
 
 void startMenuPage(App *app) {
-    typedef enum {
-        CHOICE_START = 0,
-        CHOICE_SETTINGS,
-        CHOICE_EXIT
-    } Choice;
-
     BorderedWindow borderedWindow = {
         .config = {
             .dimensions = {
@@ -54,7 +50,12 @@ void startMenuPage(App *app) {
 
     bool pageShouldClose = FALSE;
 
-    Choice choice = 0;
+    enum {
+        CHOICE_START = 0,
+        CHOICE_SETTINGS,
+        CHOICE_EXIT
+    } choice = 0;
+
     int inputChar = 0;
 
     do {
@@ -113,12 +114,6 @@ void startMenuPage(App *app) {
 }
 
 void citiesPage(App *app) {
-    typedef enum {
-        CHOICE_BACK = 0,
-        CHOICE_ADD,
-        CHOICE_DELETE,
-    } Choice;
-
     BorderedWindow borderedWindow = {
         .config = {
                 .dimensions = {
@@ -138,7 +133,17 @@ void citiesPage(App *app) {
 
     bool pageShouldClose = FALSE;
 
-    Choice choice = 0;
+    enum {
+        CHOICE_BACK = 0,
+        CHOICE_ADD,
+        CHOICE_DELETE
+    } choice = 0;
+
+    enum {
+        MODE_NORMAL = 0,
+        MODE_DELETE
+    } mode = 0;
+
     int inputChar = 0;
 
     do {
@@ -158,20 +163,28 @@ void citiesPage(App *app) {
         }
 
         if (inputChar == '\n') {
-            if (choice > CHOICE_DELETE) {
-                // Do something.
-            }
-            else {
-                switch (choice) {
-                    case CHOICE_BACK:
-                        app->page = PAGE_START;
-                        pageShouldClose = TRUE;
-                        break;
-                    case CHOICE_ADD:
-                        break;
-                    case CHOICE_DELETE:
-                        break;
-                }
+            switch (mode) {
+                case MODE_NORMAL:
+                    if (choice > CHOICE_DELETE) {
+                        // Do something.
+                    }
+                    else {
+                        switch (choice) {
+                            case CHOICE_BACK:
+                                app->page = PAGE_START;
+                                pageShouldClose = TRUE;
+                                break;
+                            case CHOICE_ADD:
+                                createAddCity(&app->cities, "City 1");
+                                break;
+                            case CHOICE_DELETE:
+                                break;
+                        }
+                    }
+                    break;
+                
+                case MODE_DELETE:
+                    break;
             }
         }
 

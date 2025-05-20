@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Isrc -Wall -Wextra -foptimize-sibling-calls
+CFLAGS = -Isrc -Wall -Wextra
 LDFLAGS = -lncurses -lncursesw -DNCURSES_STATIC
 DEBUGFLAGS = -g
 
@@ -12,7 +12,11 @@ OBJECTS = $(foreach OBJECT,$(SOURCES:.c=.o),build/$(OBJECT))
 
 TARGET = main.exe
 
-all: build/$(TARGET)
+all: info build/$(TARGET)
+	
+info:
+	@echo "Compiling with:"
+	@$(CC) --version
 
 build/$(TARGET): build $(OBJECTS)
 	$(CC) $(OBJECTS) -o $@ $(LDFLAGS) $(DEBUGFLAGS)
@@ -23,10 +27,10 @@ build:
 $(OBJECTS): build/%.o: src/%.c
 	$(CC) $< -o $@ -c $(CFLAGS) $(DEBUGFLAGS)
 
-run: build/$(TARGET)
-	$<
+run: info build/$(TARGET)
+	build/$(TARGET)
 
 clean:
 	rm -r build
 
-.PHONY=all
+.PHONY=all info

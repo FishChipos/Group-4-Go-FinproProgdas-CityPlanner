@@ -5,22 +5,17 @@ Functions to display pages.
 #ifndef PAGES_H
 #define PAGES_H
 
-#include "settings.h"
-
-typedef enum {
-    FLAG_TERMINAL_COLOR_UNSUPPORTED = 1,
-    FLAG_TERMINAL_COLOR_FIXED = 2,
-} TerminalFlags;
+#include "app.h"
 
 // Page functions.
 
 // Displays an info page for the flags set for the terminal.
-void infoPage(Settings *settings, TerminalFlags *terminalFlags);
+void infoPage(AppState *app);
 // Displays the start menu page.
-void startMenuPage(Settings *settings);
+void startMenuPage(AppState *app);
 
-void mainPage(Settings *settings);
+void mainPage(AppState *app);
 
-void settingsPage(Settings *settings);
+void settingsPage(AppState *app);
 
 #endif

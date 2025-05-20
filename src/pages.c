@@ -1,18 +1,19 @@
 #include "pages.h"
 
 #include <ncurses/ncurses.h>
+#include <ctype.h>
 
 #include "window.h"
 
-void infoPage(Settings *settings, TerminalFlags *flags) {
-    if (*flags != 0) {
+void infoPage(AppState *app) {
+    if (app->terminalFlags != 0) {
         printw("CITY PLANNER\n\n");
 
-        if (*flags & FLAG_TERMINAL_COLOR_UNSUPPORTED) {
+        if (app->terminalFlags & FLAG_TERMINAL_COLOR_UNSUPPORTED) {
             printw("INFO: Color is not supported on this terminal.\n");
         }
         
-        if (*flags & FLAG_TERMINAL_COLOR_FIXED) {
+        if (app->terminalFlags & FLAG_TERMINAL_COLOR_FIXED) {
             printw("INFO: Color definitions are fixed on this terminal.\n");
         }
 
@@ -22,9 +23,11 @@ void infoPage(Settings *settings, TerminalFlags *flags) {
 
         getch();
     }   
+
+    app->page = PAGE_START;
 }
 
-void startMenuPage(Settings *settings) {
+void startMenuPage(AppState *app) {
     typedef enum {
         CHOICE_START = 0,
         CHOICE_SETTINGS,
@@ -40,7 +43,7 @@ void startMenuPage(Settings *settings) {
             .top = 1,
             .left = 4
         },
-        .borderColor = COLOR_YELLOW,
+        .borderColor = COLOR_WHITE
     };
 
     WINDOW *window = createWindow(config);
@@ -48,7 +51,10 @@ void startMenuPage(Settings *settings) {
 
     mvwprintw(window, 2, 4, "MAIN MENU");
     mvwprintw(window, 4, 6, "Start");
-    mvwprintw(window, 5, 6, "Exit");
+    mvwprintw(window, 5, 6, "Settings");
+    mvwprintw(window, 6, 6, "Exit");
+
+    mvwprintw(window, 8, 6, "Use W, A, S, D to navigate and ENTER to select");
 
     wrefresh(window);
 
@@ -61,7 +67,7 @@ void startMenuPage(Settings *settings) {
         mvwprintw(window, 4 + choice, 4, " ");
 
         // Arrow keys emit \033, [, and then A for up arrow and B for down arrow.
-        if (c == 'w') {
+        if (tolower(c) == 'w') {
             if (choice == CHOICE_START) {
                 choice = CHOICE_EXIT;
             }
@@ -69,13 +75,26 @@ void startMenuPage(Settings *settings) {
                 choice--;
             }
         }
-        else if (c == 's') {
-            choice = (choice + 1) % 2;
+        else if (tolower(c) == 's') {
+            choice = (choice + 1) % 3;
         }
         // Enter key.
         else if (c == '\n') {
             // Move to other pages.
-            
+            switch (choice) {
+                case CHOICE_START:
+
+                    windowShouldClose = TRUE;
+                    break;
+                case CHOICE_SETTINGS:
+
+                    windowShouldClose = TRUE;
+                    break;
+                case CHOICE_EXIT:
+                    windowShouldClose = TRUE;
+                    app->shouldClose = TRUE;
+                    break;
+            }
         }
 
         // Print a cursor for the selected choice.
@@ -89,6 +108,6 @@ void startMenuPage(Settings *settings) {
     deleteWindow(window);
 }
 
-void settingsPage(Settings *settings) {
+void settingsPage(AppState *app) {
 
 }

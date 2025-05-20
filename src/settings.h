@@ -3,8 +3,5 @@
 
 #include <ncurses/ncurses.h>
 
-typedef struct {
-    bool colorEnabled;
-} Settings;
 
 #endif

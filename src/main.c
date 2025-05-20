@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <ncurses/ncurses.h>
 
+#include "app.h"
 #include "pages.h"
 #include "settings.h"
 #include "window.h"
@@ -17,25 +18,42 @@ int main() {
     keypad(stdscr, TRUE);
     curs_set(CURSOR_INVISIBLE);
 
-    // Initialize structs.
-    TerminalFlags terminalFlags = 0;
-    Settings settings;
+    refresh();
 
+    // Initialize structs.
+    AppState app = {
+        .shouldClose = FALSE,
+        .terminalFlags = 0,
+        .page = PAGE_INFO
+    };
+
+    // Initialize terminal flags.
     if (!has_colors()) {
-        terminalFlags |= FLAG_TERMINAL_COLOR_UNSUPPORTED;
+        app.terminalFlags |= FLAG_TERMINAL_COLOR_UNSUPPORTED;
     }
     else {
         start_color();
     }
 
-    if (!can_change_color()) terminalFlags |= FLAG_TERMINAL_COLOR_FIXED;
+    if (!can_change_color()) app.terminalFlags |= FLAG_TERMINAL_COLOR_FIXED;
 
-    infoPage(&settings, &terminalFlags);
+    // Main loop.
+    while (!app.shouldClose) {
+        switch (app.page) {
+            case PAGE_INFO:
+                infoPage(&app);
+                break;
+            case PAGE_START:
+                startMenuPage(&app);
+                break;
+            case PAGE_SETTINGS:
+                settingsPage(&app);
+                break;
+        }
 
-    clear();
-    refresh();
-
-    startMenuPage(&settings);
+        clear();
+        refresh();
+    };
 
     endwin();
 

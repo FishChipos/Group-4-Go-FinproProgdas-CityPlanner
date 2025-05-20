@@ -1,4 +1,4 @@
-CC = gcc
+CC = C:\\msys64\\mingw64\\bin\\gcc.exe
 CFLAGS = -Isrc -Wall -Wextra
 LDFLAGS = -lncurses -lncursesw -DNCURSES_STATIC
 

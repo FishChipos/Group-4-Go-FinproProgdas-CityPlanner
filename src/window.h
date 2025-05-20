@@ -19,6 +19,8 @@ typedef struct {
     } padding;
 
     int textColor;
+    int borderColor;
+
 } WindowConfig;
 
 // Struct containing configuration options for a window.
@@ -27,8 +29,6 @@ typedef struct {
     WINDOW *contentWindow;
 
     WindowConfig config;
-    
-    int borderColor;
 } BorderedWindow;
 
 // Creates a window with default border.

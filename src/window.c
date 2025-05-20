@@ -8,7 +8,7 @@ void createBorderedWindow(BorderedWindow *window) {
     *borderWindow = newwin(window->config.dimensions.height, window->config.dimensions.width, window->config.padding.top, window->config.padding.left);
     *contentWindow = newwin(window->config.dimensions.height - 2, window->config.dimensions.width - 2, window->config.padding.top + 1, window->config.padding.left + 1);
 
-    init_pair(1, window->borderColor, COLOR_BLACK);
+    init_pair(1, window->config.borderColor, COLOR_BLACK);
 
     wattron(*borderWindow, COLOR_PAIR(1));
     box(*borderWindow, 0, 0);

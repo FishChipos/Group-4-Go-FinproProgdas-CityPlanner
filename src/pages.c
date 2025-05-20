@@ -43,9 +43,9 @@ void startMenuPage(App *app) {
             .padding = {
                 .top = 1,
                 .left = 4
-            }
-        },
-        .borderColor = COLOR_WHITE
+            },   
+            .borderColor = COLOR_WHITE
+        }
     };
 
     createBorderedWindow(&borderedWindow);
@@ -128,9 +128,9 @@ void citiesPage(App *app) {
             .padding = {
                 .top = 1,
                 .left = 4
-            }
-        },
-        .borderColor = COLOR_WHITE
+            },
+            .borderColor = COLOR_WHITE
+        }
     };
 
     createBorderedWindow(&borderedWindow);
@@ -174,9 +174,6 @@ void citiesPage(App *app) {
                 }
             }
         }
-
-        // Select color.
-        init_pair(2, COLOR_BLACK, COLOR_WHITE);
 
         mvwaddstr(window, 2, 4, "CITIES");
 

@@ -102,7 +102,7 @@ void startMenuPage(App *app) {
 
         mvwaddstr(window, 8, 6, "Use W, A, S, D to navigate and ENTER to select");
 
-        // Print arrow and highlights.
+        // Draw arrow and highlights.
         mvwaddch(window, 4 + choice, 4, '>');
         mvwchgat(window, 4 + choice, 4, -1, A_BOLD, 0, NULL);
 

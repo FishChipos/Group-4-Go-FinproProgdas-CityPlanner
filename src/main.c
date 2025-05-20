@@ -48,6 +48,7 @@ int main() {
                 break;
             case PAGE_CITIES:
                 citiesPage(&app);
+                break;
             case PAGE_SETTINGS:
                 settingsPage(&app);
                 break;

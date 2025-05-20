@@ -101,7 +101,7 @@ void startMenuPage(App *app) {
         mvwaddstr(window, 5, 6, "Settings");
         mvwaddstr(window, 6, 6, "Exit");
 
-        mvwaddstr(window, 8, 6, "Use W, A, S, D to navigate and ENTER to select");
+        mvwaddstr(window, borderedWindow.config.dimensions.height - 2 - 2 - 1, 6, "Use W, A, S, D to navigate and ENTER to select");
 
         // Draw arrow and highlights.
         mvwaddch(window, 4 + choice, 4, '>');
@@ -150,42 +150,74 @@ void citiesPage(App *app) {
         wclear(window);
         // Input handling.
         if (tolower(inputChar) == 'w') {
-            if (choice == 0) {
-                choice = CHOICE_DELETE + app->cities.count;
+            if (mode == MODE_DELETE) {
+                if (choice <= CHOICE_DELETE + 1) {
+                    choice = CHOICE_DELETE + app->cities.count;
+                }
+                else {
+                    choice--;
+                }
             }
             else {
-                choice--;
+                if (choice == 0) {
+                    choice = CHOICE_DELETE + app->cities.count;
+                }
+                else {
+                    choice--;
+                }
             }
         }
 
         if (tolower(inputChar) == 's') {
-            choice = (choice + 1) % (CHOICE_DELETE + app->cities.count + 1);
+            if (mode == MODE_DELETE) {
+                if (choice >= CHOICE_DELETE + app->cities.count) {
+                    choice = CHOICE_DELETE + 1;
+                }
+                else {
+                    choice++;
+                } 
+            }   
+            else {
+                choice = (choice + 1) % (CHOICE_DELETE + app->cities.count + 1);
+            }
         }
 
         if (inputChar == '\n') {
-            switch (mode) {
-                case MODE_NORMAL:
-                    if (choice > CHOICE_DELETE) {
-                        // Do something.
-                    }
-                    else {
-                        switch (choice) {
-                            case CHOICE_BACK:
-                                app->page = PAGE_START;
-                                pageShouldClose = TRUE;
-                                break;
-                            case CHOICE_ADD:
-                                createAddCity(&app->cities, "City 1");
-                                break;
-                            case CHOICE_DELETE:
-                                break;
-                        }
-                    }
-                    break;
-                
-                case MODE_DELETE:
-                    break;
+            if (mode == MODE_DELETE) {
+                size_t cityIndex = choice - CHOICE_DELETE - 1;
+
+                // Snap the cursor to the nearest city available.
+                if (cityIndex >= app->cities.count - 1) {
+                    choice--;
+                }
+
+                deleteCity(&app->cities, cityIndex);
             }
+            else {
+                if (choice > CHOICE_DELETE) {
+                    // Do something.
+                }
+                else {
+                    switch (choice) {
+                        case CHOICE_BACK:
+                            app->page = PAGE_START;
+                            pageShouldClose = TRUE;
+                            break;
+                        case CHOICE_ADD:
+                            createAddCity(&app->cities, "City 1");
+                            break;
+                        case CHOICE_DELETE:
+                            mode = MODE_DELETE;
+                            choice = CHOICE_DELETE + 1;
+                            break;
+                    }
+                }
+            }
+        }
+
+        if (mode == MODE_DELETE && tolower(inputChar) == 'q') {
+            mode = MODE_NORMAL;
+            choice = CHOICE_BACK;
         }
 
         mvwaddstr(window, 2, 4, "CITIES");
@@ -202,15 +234,30 @@ void citiesPage(App *app) {
                 mvwprintw(window, 8 + cityIndex, 6, "%s", app->cities.array[cityIndex].name);
             }
         }
+
+        // Draw controls for delete mode.
+        if (mode == MODE_DELETE) {
+            mvwaddstr(window, borderedWindow.config.dimensions.height - 2 - 2 - 1, 6, "Press Q to exit delete mode.");
+        }
         
         // Draw arrow and highlights.
-        if (choice > CHOICE_DELETE) {
-            mvwaddch(window, 8 + (choice - CHOICE_DELETE), 4, '>');
-            mvwchgat(window, 8 + (choice - CHOICE_DELETE), 4, -1, A_BOLD, 0, NULL);
+        if (mode == MODE_DELETE) {
+            if (app->cities.count > 0) {
+                init_pair(2, COLOR_RED, COLOR_BLACK);
+
+                mvwaddch(window, 7 + (choice - CHOICE_DELETE), 4, '>');
+                mvwchgat(window, 7 + (choice - CHOICE_DELETE), 4, -1, A_BOLD, 2, NULL);
+            }
         }
         else {
-            mvwaddch(window, 4 + choice, 4, '>');
-            mvwchgat(window, 4 + choice, 4, -1, A_BOLD, 0, NULL);
+            if (choice > CHOICE_DELETE) {
+                mvwaddch(window, 7 + (choice - CHOICE_DELETE), 4, '>');
+                mvwchgat(window, 7 + (choice - CHOICE_DELETE), 4, -1, A_BOLD, 0, NULL);
+            }
+            else {
+                mvwaddch(window, 4 + choice, 4, '>');
+                mvwchgat(window, 4 + choice, 4, -1, A_BOLD, 0, NULL);
+            }
         }
 
         wrefresh(window);

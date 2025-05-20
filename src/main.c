@@ -21,11 +21,7 @@ int main() {
     refresh();
 
     // Initialize structs.
-    App app = {
-        .shouldClose = FALSE,
-        .terminalFlags = 0,
-        .page = PAGE_INFO
-    };
+    App app = { 0 };
 
     // Initialize terminal flags.
     if (!has_colors()) {

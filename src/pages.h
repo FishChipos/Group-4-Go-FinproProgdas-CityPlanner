@@ -14,7 +14,7 @@ void infoPage(App *app);
 // Displays the start menu page.
 void startMenuPage(App *app);
 
-void mainPage(App *app);
+void citiesPage(App *app);
 
 void settingsPage(App *app);
 

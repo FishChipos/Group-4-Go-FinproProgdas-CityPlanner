@@ -1,26 +1,33 @@
 #include "window.h"
+#include <ncurses/ncurses.h>
 
-WINDOW *createWindow(WindowConfig config) {
-    WINDOW *window;
+void createBorderedWindow(BorderedWindow *window) {
+    WINDOW **borderWindow = &window->borderWindow;
+    WINDOW **contentWindow = &window->contentWindow;
 
-    window = newwin(config.dimensions.height, config.dimensions.width, config.padding.top, config.padding.left);
+    *borderWindow = newwin(window->config.dimensions.height, window->config.dimensions.width, window->config.padding.top, window->config.padding.left);
+    *contentWindow = newwin(window->config.dimensions.height - 2, window->config.dimensions.width - 2, window->config.padding.top + 1, window->config.padding.left + 1);
 
-    init_pair(1, config.borderColor, COLOR_BLACK);
+    init_pair(1, window->borderColor, COLOR_BLACK);
 
-    wattron(window, COLOR_PAIR(1));
-    box(window, 0, 0);
-    wattroff(window, COLOR_PAIR(1));
+    wattron(*borderWindow, COLOR_PAIR(1));
+    box(*borderWindow, 0, 0);
+    wattroff(*borderWindow, COLOR_PAIR(1));
 
-    wrefresh(window);
-
-    return window;
+    wrefresh(*borderWindow);
+    wrefresh(*contentWindow);
 }
 
-void deleteWindow(WINDOW *window) {
-    // Remove border.
-    wborder(window, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
+void deleteBorderedWindow(BorderedWindow *window) {
+    WINDOW **borderWindow = &window->borderWindow;
+    WINDOW **contentWindow = &window->contentWindow;
 
-    wrefresh(window);
+    wclear(*borderWindow);
+    wclear(*contentWindow);
+
+    wrefresh(*borderWindow);
+    wrefresh(*contentWindow);
     
-    delwin(window);
+    delwin(*borderWindow);
+    delwin(*contentWindow);
 }

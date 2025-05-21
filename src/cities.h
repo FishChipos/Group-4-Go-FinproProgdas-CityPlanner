@@ -6,6 +6,9 @@
 // Struct containing data for a city.
 typedef struct {
     char *name;
+    int population;
+    double area;
+    int transport;
 } City;
 
 // Struct containing a dynamic array of cities.

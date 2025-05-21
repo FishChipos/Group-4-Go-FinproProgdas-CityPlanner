@@ -4,10 +4,7 @@ LDFLAGS = -lncurses -lncursesw -DNCURSES_STATIC
 DEBUGFLAGS = -g
 
 SOURCES = \
-	main.c \
-	pages.c \
-	window.c \
-	cities.c
+	main.c
 
 OBJECTS = $(foreach OBJECT,$(SOURCES:.c=.o),build/$(OBJECT))
 

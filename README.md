@@ -13,7 +13,7 @@ Group 4's final project submission for Pemrograman Dasar.
 
 ### Project Dependencies
 
-This project requires ncurses (for the terminal UI) and make (to build the project).
+This project requires make (to build the project).
 
 It is recommended to use the MSYS2 MinGW-w64 installation for the gcc compiler.
 
@@ -28,16 +28,6 @@ pacman -S make
 ```
 
 Make sure that `make.exe` is added to the PATH environment variable so that it can be accessed by other terminals. Usually it will be under `MSYS2InstallationPath\usr\bin`.
-
-#### ncurses
-
-For ncurses, if you are using a MinGW-w64 installation of gcc, type the following in a MinGW64 terminal provided by MSYS2:
-
-```bash
-pacman -S mingw-w64-ucrt-x86_64-ncurses
-```
-
-For other installations install the appropriate version of ncurses.
 
 ### Compiling and Running the Project
 
@@ -62,19 +52,3 @@ make run
 to compile (if not already compiled) and run the project.
 
 If there are issues with compilation, make sure that you are using the correct version of gcc with the necessary headers and libraries.
-
-If the output looks weird then use a dedicated terminal like cmd instead of an integrated terminal.
-
-#### Alternative: Manual Compilation
-
-Run the following command in the project root directory:
-
-```bash
-gcc -o build/main.exe src/main.c src/pages.c src/window.c -lncurses -lncursesw -DNCURSES_STATIC
-```
-
-Then to run the program (on Windows), use:
-
-```bash
-.\build\main.exe
-```

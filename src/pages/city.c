@@ -4,11 +4,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-void printCity(App *app, City *city) {
+void printCityData(App *app, City *city) {
     printf("\n\033[1;5;32m%s\033[0m\n", city->name);
     printf("%-15s: %llu people\n", "Population", city->population);
     printf("%-15s: %.2lf m^2\n", "Area", city->area);
-    printf("%-15s: %llu\n", "Transportation", city->transportation.personal_vehicle + city->transportation.public_vehicle);
+    printf("%-15s: %llu\n", "Transportation", city->transportation.personalTransportation + city->transportation.publicTransportation);
 }
 
 void pageTransportation(App *app, City *city) {
@@ -24,12 +24,12 @@ void pageTransportation(App *app, City *city) {
         system("clear");
 
         puts("\033[1m--- TRANSPORTATION ---\033[0m");
-        printCity(app, city);
+        printCityData(app, city);
 
         puts("");
         
-        printf("%-15s: %llu\n", "Public", city->transportation.public_vehicle);
-        printf("%-15s: %llu\n", "Personal", city->transportation.personal_vehicle);
+        printf("%-15s: %llu\n", "Public", city->transportation.publicTransportation);
+        printf("%-15s: %llu\n", "Personal", city->transportation.personalTransportation);
 
         puts("");
 
@@ -51,12 +51,12 @@ void pageTransportation(App *app, City *city) {
             case PUBLIC:
                 printf("%s", "Enter number of vehicles: ");
                 fgets(buffer, 128, stdin);
-                sscanf(buffer, "%llu", &city->transportation.public_vehicle);
+                sscanf(buffer, "%llu", &city->transportation.publicTransportation);
                 break;
             case PERSONAL:
                 printf("%s", "Enter number of vehicles: ");
                 fgets(buffer, 128, stdin);
-                sscanf(buffer, "%llu", &city->transportation.personal_vehicle);
+                sscanf(buffer, "%llu", &city->transportation.personalTransportation);
                 break;
             default:
                 promptInvalidInput();
@@ -81,7 +81,7 @@ void pageCity(App *app, City *city) {
         system("clear");
 
         puts("\033[1m--- CITY ---\033[0m");
-        printCity(app, city);
+        printCityData(app, city);
 
         puts("");
 

@@ -7,21 +7,6 @@
 
 void pageCities(App *app) {
     enum {
-        CHOICE_BACK = 1,
-        CHOICE_ADD,
-        CHOICE_DUPLICATE,
-        CHOICE_DELETE
-    } choice = 1;
-
-    enum {
-        CHOICE_DELETE_EXIT = 1
-    } choiceDelete = 1;
-
-    enum {
-        CHOICE_DUPLICATE_EXIT = 1
-    } choiceDuplicate = 1;
-
-    enum {
         MODE_NORMAL = 0,
         MODE_DUPLICATE,
         MODE_DELETE
@@ -32,6 +17,21 @@ void pageCities(App *app) {
     char buffer[128];
 
     while (!pageShouldClose) {
+        enum {
+            CHOICE_BACK = 1,
+            CHOICE_ADD,
+            CHOICE_DUPLICATE,
+            CHOICE_DELETE
+        } choice = -1;
+
+        enum {
+            CHOICE_DELETE_EXIT = 1
+        } choiceDelete = -1;
+
+        enum {
+            CHOICE_DUPLICATE_EXIT = 1
+        } choiceDuplicate = -1;
+
         system("clear");
 
         switch (mode) {
@@ -41,7 +41,7 @@ void pageCities(App *app) {
                 puts("2. Add city");
                 puts("3. Duplicate city");
                 puts("4. Delete city\n");
-
+                                
                 if (app->cities.count <= 0) {
                     puts("No cities yet!\n");
                 }
@@ -107,7 +107,7 @@ void pageCities(App *app) {
                 printf("Choice: ");
                 
                 fgets(buffer, 128, stdin);
-                sscanf(buffer, "%d", (int*)&choiceDuplicate);
+                if (buffer[0] != '\0') sscanf(buffer, "%d", (int*)&choiceDuplicate);
 
                 switch (choiceDuplicate) {
                     case CHOICE_DUPLICATE_EXIT:
@@ -143,7 +143,7 @@ void pageCities(App *app) {
                 printf("Choice: ");
                 
                 fgets(buffer, 128, stdin);
-                sscanf(buffer, "%d", (int*)&choiceDelete);
+                if (buffer[0] != '\0') sscanf(buffer, "%d", (int*)&choiceDelete);
 
                 switch (choiceDelete) {
                     case CHOICE_DELETE_EXIT:

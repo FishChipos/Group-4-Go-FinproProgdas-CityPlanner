@@ -9,8 +9,8 @@ typedef struct {
     size_t population;
     double area;
     struct {
-        size_t personal_vehicle;
         size_t public_vehicle;
+        size_t personal_vehicle;
     } transportation;
 } City;
 

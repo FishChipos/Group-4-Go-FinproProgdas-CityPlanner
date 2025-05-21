@@ -2,30 +2,124 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-void pageCity(App *app, City *city) {
-    enum {
-        CHOICE_BACK = 1
-    } choice;
+void printCity(App *app, City *city) {
+    printf("\n\033[1;5;32m%s\033[0m\n", city->name);
+    printf("%-15s: %llu people\n", "Population", city->population);
+    printf("%-15s: %.2lf m^2\n", "Area", city->area);
+    printf("%-15s: %llu\n", "Transportation", city->transportation.personal_vehicle + city->transportation.public_vehicle);
+}
 
+void pageTransportation(App *app, City *city) {
     bool pageShouldClose = false;
 
     while (!pageShouldClose) {
+        enum {
+            BACK = 1,
+            PUBLIC,
+            PERSONAL
+        } choice = -1;
+
         system("clear");
 
-        puts("\033[1mCITY\033[0m");
-        printf("%-10s: %s\n", "Name", city->name);
+        puts("\033[1m--- TRANSPORTATION ---\033[0m");
+        printCity(app, city);
+
+        puts("");
+        
+        printf("%-15s: %llu\n", "Public", city->transportation.public_vehicle);
+        printf("%-15s: %llu\n", "Personal", city->transportation.personal_vehicle);
 
         puts("");
 
-        puts("1. Back\n");
+        puts("1. Back");
+        puts("2. Public");
+        puts("3. Personal\n");
 
         printf("%s", "Choice: ");
-        scanf("%d", (int*)&choice);
+        char buffer[128];
+        fgets(buffer, 128, stdin);
+        sscanf(buffer, "%d", (int*)&choice);
 
+        puts("");
+        
         switch (choice) {
-            case CHOICE_BACK:
+            case BACK:
                 pageShouldClose = true;
+                break;
+            case PUBLIC:
+                printf("%s", "Enter number of vehicles: ");
+                fgets(buffer, 128, stdin);
+                sscanf(buffer, "%llu", &city->transportation.public_vehicle);
+                break;
+            case PERSONAL:
+                printf("%s", "Enter number of vehicles: ");
+                fgets(buffer, 128, stdin);
+                sscanf(buffer, "%llu", &city->transportation.personal_vehicle);
+                break;
+            default:
+                promptInvalidInput();
+                break;
+        }
+    }
+
+}
+
+void pageCity(App *app, City *city) {
+    bool pageShouldClose = false;
+
+    while (!pageShouldClose) {
+        enum {
+            BACK = 1,
+            RENAME,
+            POPULATION,
+            AREA,
+            TRANSPORT
+        } choice = -1;
+
+        system("clear");
+
+        puts("\033[1m--- CITY ---\033[0m");
+        printCity(app, city);
+
+        puts("");
+
+        puts("1. Back");
+        puts("2. Rename City");
+        puts("3. Population");
+        puts("4. Area");
+        puts("5. Transportation\n");
+
+        printf("%s", "Choice: ");
+        char buffer[128];
+        fgets(buffer, 128, stdin);
+        if (buffer[0] != '\n') sscanf(buffer, "%d", (int*)&choice);
+
+        puts("");
+        
+        switch (choice) {
+            case BACK:
+                pageShouldClose = true;
+                break;
+            case RENAME:
+                printf("%s", "Enter city name: ");
+                fgets(buffer, 128, stdin);
+                buffer[strcspn(buffer, "\n\r")] = '\0';
+                renameCity(city, buffer, 128);
+                break;
+            case POPULATION:
+                printf("%s", "Enter city population: ");
+                fgets(buffer, 128, stdin);
+                sscanf(buffer, "%llu", &city->population);
+                break;
+            case AREA:
+                printf("%s", "Enter city area: ");
+                fgets(buffer, 128, stdin);
+                sscanf(buffer, "%lf", &city->area);
+                break;
+            case TRANSPORT:
+                pageTransportation(app, city);
                 break;
             default:
                 promptInvalidInput();

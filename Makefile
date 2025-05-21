@@ -13,6 +13,7 @@ SOURCES = \
 	pages/prompts.c \
 	pages/start.c \
 	pages/cities.c \
+	pages/city.c \
 
 # Parse corresponding object files.
 OBJECTS = $(foreach OBJECT,$(SOURCES:.c=.o),build/$(OBJECT))

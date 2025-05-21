@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void pageCities(App *app) {
     enum {
@@ -50,6 +51,7 @@ void pageCities(App *app) {
 
                 printf("Choice: ");
                 scanf("%d", (int*)&choice);
+                puts("");
 
                 switch (choice) {
                     case CHOICE_BACK:
@@ -59,7 +61,11 @@ void pageCities(App *app) {
                         addCity(&app->cities, (City) { 0 });
 
                         char cityName[128];
-                        snprintf(cityName, 128, "City %llu", app->cities.count);
+
+                        printf("%s", "Enter city name: ");
+                        fflush(stdin);
+                        fgets(cityName, 128, stdin);
+                        cityName[strcspn(cityName, "\n")] = '\0';
 
                         renameCity(&app->cities.array[app->cities.count - 1], cityName, 128);
                         break;
@@ -71,7 +77,7 @@ void pageCities(App *app) {
                         break;
                     default:
                         if (choice >= 5 && choice <= 5 + (unsigned int)app->cities.count - 1) {
-                            // Open city.
+                            pageCity(app, &app->cities.array[choice - 5]);
                         }
                         else {
                             promptInvalidInput();

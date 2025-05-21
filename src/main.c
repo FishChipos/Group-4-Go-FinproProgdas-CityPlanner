@@ -6,7 +6,6 @@
 #include "pages/pages.h"
 
 int main() {
-
     App app = { 0 };
 
     while (!app.shouldClose) {

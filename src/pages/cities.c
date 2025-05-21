@@ -37,7 +37,7 @@ void pageCities(App *app) {
         switch (mode) {
             case MODE_NORMAL:
                 puts("\033[1m--- CITIES ---\033[0m");
-                puts("1. Back");
+                puts("1. Back\n");
                 puts("2. Add city");
                 puts("3. Duplicate city");
                 puts("4. Delete city\n");

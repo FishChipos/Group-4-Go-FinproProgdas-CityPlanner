@@ -4,22 +4,22 @@
 #include <stdlib.h>
 
 void pageCities(App *app) {
-    enum Choice : int {
+    enum {
         CHOICE_BACK = 1,
         CHOICE_ADD,
         CHOICE_DUPLICATE,
         CHOICE_DELETE
     } choice;
 
-    enum ChoiceDelete : int {
+    enum {
         CHOICE_DELETE_EXIT = 1
     } choiceDelete;
 
-    enum ChoiceDuplicate : int {
+    enum {
         CHOICE_DUPLICATE_EXIT = 1
     } choiceDuplicate;
 
-    enum Mode : int {
+    enum {
         MODE_NORMAL = 0,
         MODE_DUPLICATE,
         MODE_DELETE
@@ -49,7 +49,7 @@ void pageCities(App *app) {
                 }
 
                 printf("Choice: ");
-                scanf("%d", &choice);
+                scanf("%d", (int*)&choice);
 
                 switch (choice) {
                     case CHOICE_BACK:
@@ -70,7 +70,7 @@ void pageCities(App *app) {
                         mode = MODE_DELETE;
                         break;
                     default:
-                        if (choice >= 5 && choice <= 5 + (int)app->cities.count - 1) {
+                        if (choice >= 5 && choice <= 5 + (unsigned int)app->cities.count - 1) {
                             // Open city.
                         }
                         else {
@@ -94,14 +94,14 @@ void pageCities(App *app) {
                 puts("MODE: \033[1;34mDUPLICATE\033[0m\n");
 
                 printf("Choice: ");
-                scanf("%d", &choiceDuplicate);
+                scanf("%d", (int*)&choiceDuplicate);
 
                 switch (choiceDuplicate) {
                     case CHOICE_DUPLICATE_EXIT:
                         mode = MODE_NORMAL;
                         break;
                     default:
-                        if (choiceDuplicate >= 2 && choiceDuplicate < 2 + (int)app->cities.count) {
+                        if (choiceDuplicate >= 2 && choiceDuplicate < 2 + (unsigned int)app->cities.count) {
                             size_t cityIndex = choiceDuplicate - 2;
                             // TODO: Make a copy function.
                             City copiedCity = app->cities.array[cityIndex];
@@ -128,14 +128,14 @@ void pageCities(App *app) {
                 puts("MODE: \033[1;31mDELETE\033[0m\n");
 
                 printf("Choice: ");
-                scanf("%d", &choiceDelete);
+                scanf("%d", (int*)&choiceDelete);
 
                 switch (choiceDelete) {
                     case CHOICE_DELETE_EXIT:
                         mode = MODE_NORMAL;
                         break;
                     default:
-                        if (choiceDelete >= 2 && choiceDelete < 2 + (int)app->cities.count) {
+                        if (choiceDelete >= 2 && choiceDelete < 2 + (unsigned int)app->cities.count) {
                             size_t cityIndex = choiceDelete - 2;
                             deleteCity(&app->cities, cityIndex);
                         }

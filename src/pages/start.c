@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 void pageStart(App *app) {
-    enum Choice : int {
+    enum {
         CHOICE_START = 1,
         CHOICE_EXIT
     } choice;
@@ -19,7 +19,7 @@ void pageStart(App *app) {
         puts("2. Exit\n");
 
         printf("Choice: ");
-        scanf("%d", &choice);
+        scanf("%d", (int*)&choice);
 
         switch (choice) {
             case CHOICE_START:

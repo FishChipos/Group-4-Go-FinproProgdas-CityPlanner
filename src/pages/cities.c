@@ -9,21 +9,21 @@ void pageCities(App *app) {
         CHOICE_ADD,
         CHOICE_DUPLICATE,
         CHOICE_DELETE
-    } choice;
+    } choice = 1;
 
     enum {
         CHOICE_DELETE_EXIT = 1
-    } choiceDelete;
+    } choiceDelete = 1;
 
     enum {
         CHOICE_DUPLICATE_EXIT = 1
-    } choiceDuplicate;
+    } choiceDuplicate = 1;
 
     enum {
         MODE_NORMAL = 0,
         MODE_DUPLICATE,
         MODE_DELETE
-    } mode;
+    } mode = 0;
 
     bool pageShouldClose = false;
 

@@ -7,7 +7,7 @@ void pageStart(App *app) {
     enum {
         CHOICE_START = 1,
         CHOICE_EXIT
-    } choice;
+    } choice = 1;
 
     bool pageShouldClose = false;
 

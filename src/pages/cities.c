@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <string.h>
 
 void pageCities(App *app) {
     enum {
@@ -10,23 +11,25 @@ void pageCities(App *app) {
         CHOICE_ADD,
         CHOICE_DUPLICATE,
         CHOICE_DELETE
-    } choice;
+    } choice = 1;
 
     enum {
         CHOICE_DELETE_EXIT = 1
-    } choiceDelete;
+    } choiceDelete = 1;
 
     enum {
         CHOICE_DUPLICATE_EXIT = 1
-    } choiceDuplicate;
+    } choiceDuplicate = 1;
 
     enum {
         MODE_NORMAL = 0,
         MODE_DUPLICATE,
         MODE_DELETE
-    } mode;
+    } mode = 0;
 
     bool pageShouldClose = false;
+
+    char buffer[128];
 
     while (!pageShouldClose) {
         system("clear");
@@ -50,7 +53,10 @@ void pageCities(App *app) {
                 }
 
                 printf("Choice: ");
-                scanf("%d", (int*)&choice);
+
+                fgets(buffer, 128, stdin);
+                sscanf(buffer, "%d", (int*)&choice);
+
                 puts("");
 
                 switch (choice) {
@@ -60,12 +66,11 @@ void pageCities(App *app) {
                     case CHOICE_ADD:
                         addCity(&app->cities, (City) { 0 });
 
-                        char cityName[128];
-
                         printf("%s", "Enter city name: ");
-                        fflush(stdin);
+
+                        char cityName[128];
                         fgets(cityName, 128, stdin);
-                        cityName[strcspn(cityName, "\n")] = '\0';
+                        cityName[strcspn(cityName, "\n\r")] = '\0';
 
                         renameCity(&app->cities.array[app->cities.count - 1], cityName, 128);
                         break;
@@ -100,7 +105,9 @@ void pageCities(App *app) {
                 puts("MODE: \033[1;34mDUPLICATE\033[0m\n");
 
                 printf("Choice: ");
-                scanf("%d", (int*)&choiceDuplicate);
+                
+                fgets(buffer, 128, stdin);
+                sscanf(buffer, "%d", (int*)&choiceDuplicate);
 
                 switch (choiceDuplicate) {
                     case CHOICE_DUPLICATE_EXIT:
@@ -134,7 +141,9 @@ void pageCities(App *app) {
                 puts("MODE: \033[1;31mDELETE\033[0m\n");
 
                 printf("Choice: ");
-                scanf("%d", (int*)&choiceDelete);
+                
+                fgets(buffer, 128, stdin);
+                sscanf(buffer, "%d", (int*)&choiceDelete);
 
                 switch (choiceDelete) {
                     case CHOICE_DELETE_EXIT:

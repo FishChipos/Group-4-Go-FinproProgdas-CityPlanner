@@ -7,9 +7,11 @@ void pageStart(App *app) {
     enum {
         CHOICE_START = 1,
         CHOICE_EXIT
-    } choice;
+    } choice = 1;
 
     bool pageShouldClose = false;
+
+    char buffer[128];
 
     while (!pageShouldClose) {
         system("clear");
@@ -19,7 +21,9 @@ void pageStart(App *app) {
         puts("2. Exit\n");
 
         printf("Choice: ");
-        scanf("%d", (int*)&choice);
+
+        fgets(buffer, 128, stdin);
+        sscanf(buffer, "%d", (int*)&choice);
 
         switch (choice) {
             case CHOICE_START:

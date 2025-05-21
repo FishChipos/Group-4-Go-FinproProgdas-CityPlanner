@@ -2,6 +2,7 @@
 #define PAGES_H
 
 #include "../app.h"
+#include "../inputparser.h"
 
 void pageStart(App *app);
 

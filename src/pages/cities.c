@@ -49,7 +49,10 @@ void pageCities(App *app) {
                 }
 
                 printf("Choice: ");
-                scanf("%d", (int*)&choice);
+
+                char buffer[128];
+                fgets(buffer, 128, stdin);
+                choice = parseInt(buffer);
 
                 switch (choice) {
                     case CHOICE_BACK:

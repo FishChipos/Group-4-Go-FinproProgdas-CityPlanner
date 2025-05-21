@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void pageCities(App *app) {
     enum {
@@ -27,6 +28,8 @@ void pageCities(App *app) {
 
     bool pageShouldClose = false;
 
+    char buffer[128];
+
     while (!pageShouldClose) {
         system("clear");
 
@@ -50,9 +53,10 @@ void pageCities(App *app) {
 
                 printf("Choice: ");
 
-                char buffer[128];
                 fgets(buffer, 128, stdin);
-                choice = parseInt(buffer);
+                sscanf(buffer, "%d", (int*)&choice);
+
+                puts("");
 
                 switch (choice) {
                     case CHOICE_BACK:
@@ -61,8 +65,11 @@ void pageCities(App *app) {
                     case CHOICE_ADD:
                         addCity(&app->cities, (City) { 0 });
 
+                        printf("%s", "Enter city name: ");
+
                         char cityName[128];
-                        snprintf(cityName, 128, "City %llu", app->cities.count);
+                        fgets(cityName, 128, stdin);
+                        cityName[strcspn(cityName, "\n\r")] = '\0';
 
                         renameCity(&app->cities.array[app->cities.count - 1], cityName, 128);
                         break;
@@ -97,7 +104,9 @@ void pageCities(App *app) {
                 puts("MODE: \033[1;34mDUPLICATE\033[0m\n");
 
                 printf("Choice: ");
-                scanf("%d", (int*)&choiceDuplicate);
+                
+                fgets(buffer, 128, stdin);
+                sscanf(buffer, "%d", (int*)&choiceDuplicate);
 
                 switch (choiceDuplicate) {
                     case CHOICE_DUPLICATE_EXIT:
@@ -131,7 +140,9 @@ void pageCities(App *app) {
                 puts("MODE: \033[1;31mDELETE\033[0m\n");
 
                 printf("Choice: ");
-                scanf("%d", (int*)&choiceDelete);
+                
+                fgets(buffer, 128, stdin);
+                sscanf(buffer, "%d", (int*)&choiceDelete);
 
                 switch (choiceDelete) {
                     case CHOICE_DELETE_EXIT:

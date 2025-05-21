@@ -11,6 +11,8 @@ void pageStart(App *app) {
 
     bool pageShouldClose = false;
 
+    char buffer[128];
+
     while (!pageShouldClose) {
         system("clear");
 
@@ -20,9 +22,8 @@ void pageStart(App *app) {
 
         printf("Choice: ");
 
-        char buffer[128];
         fgets(buffer, 128, stdin);
-        choice = parseInt(buffer);
+        sscanf(buffer, "%d", (int*)&choice);
 
         switch (choice) {
             case CHOICE_START:

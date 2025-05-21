@@ -1,6 +1,7 @@
 #include "pages.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 
 void pageStart(App *app) {
     enum : int {
@@ -11,15 +12,14 @@ void pageStart(App *app) {
     bool pageShouldClose = false;
 
     while (!pageShouldClose) {
-        puts("=== CITY PLANNER ===");
+        system("clear");
+
+        puts("\033[1m=== CITY PLANNER ===\033[0m");
         puts("1. Start");
         puts("2. Exit\n");
 
         printf("Choice: ");
-
         scanf("%d", &choice);
-
-        puts("");
 
         switch (choice) {
             case CHOICE_START:

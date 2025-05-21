@@ -5,8 +5,7 @@
 
 // Struct containing data for a city.
 typedef struct {
-    // Horrible, will make better solution later.
-    char name[128];
+    char *name;
 } City;
 
 // Struct containing a dynamic array of cities.
@@ -21,7 +20,6 @@ void addCity(Cities *cities, City city);
 // Deletes a city at a given index in the cities array.
 void deleteCity(Cities *cities, size_t index);
 
-// Creates and adds a city to the given cities array.
-void createAddCity(Cities *cities, char *name);
+void renameCity(City *city, char* newName, size_t length);
 
 #endif

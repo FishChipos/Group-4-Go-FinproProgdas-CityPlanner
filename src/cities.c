@@ -34,3 +34,14 @@ void createAddCity(Cities *cities, char name[128]) {
 
     addCity(cities, city);
 }
+
+void renameCity(City *city, char* newName, size_t length) {
+    if (city->name == NULL) {
+        city->name = calloc(length, sizeof(char));
+    }
+    else {
+        city->name = realloc(city->name, length * sizeof(char));
+    }
+
+    strncpy(city->name, newName, length);
+}

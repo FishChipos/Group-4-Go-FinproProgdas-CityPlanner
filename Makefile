@@ -12,11 +12,16 @@ BUILDDIRECTORIES = $(foreach DIRECTORY,$(sort $(dir $(SOURCES))),build/$(DIRECTO
 
 TARGET = main.exe
 
-all: info build/$(TARGET)
-	
-info:
+all:
+	@echo "Commands:"
+	@echo "make compile: compile the project"
+	@echo "make run: compile and run the project"
+	@echo "make clean: delete build results"
+	@echo
 	@echo "Compiling with:"
 	@$(CC) --version
+
+compile: build/$(TARGET)
 
 build/$(TARGET): build $(BUILDDIRECTORIES) $(OBJECTS)
 	$(CC) $(OBJECTS) -o $@ $(LDFLAGS) $(DEBUGFLAGS)
@@ -30,10 +35,10 @@ $(BUILDDIRECTORIES):
 $(OBJECTS): build/%.o: src/%.c
 	$(CC) $< -o $@ -c $(CFLAGS) $(DEBUGFLAGS)
 
-run: info build/$(TARGET)
+run: build/$(TARGET)
 	@build/$(TARGET)
 
 clean:
 	rm -r build
 
-.PHONY=all info
+.PHONY=all compile

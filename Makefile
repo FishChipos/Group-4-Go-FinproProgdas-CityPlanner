@@ -2,7 +2,7 @@
 CC = gcc
 
 # Flags.
-CFLAGS = -Wall -Wextra
+CFLAGS = -std=c99 -Wall -Wextra
 LDFLAGS = -lncurses -lncursesw -DNCURSES_STATIC
 DEBUGFLAGS = -g
 

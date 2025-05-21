@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 void pageStart(App *app) {
-    enum : int {
+    enum Choice : int {
         CHOICE_START = 1,
         CHOICE_EXIT
     } choice;

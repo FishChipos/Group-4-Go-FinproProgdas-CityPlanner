@@ -4,22 +4,22 @@
 #include <stdlib.h>
 
 void pageCities(App *app) {
-    enum : int {
+    enum Choice : int {
         CHOICE_BACK = 1,
         CHOICE_ADD,
         CHOICE_DUPLICATE,
         CHOICE_DELETE
     } choice;
 
-    enum : int {
+    enum ChoiceDelete : int {
         CHOICE_DELETE_EXIT = 1
     } choiceDelete;
 
-    enum : int {
+    enum ChoiceDuplicate : int {
         CHOICE_DUPLICATE_EXIT = 1
     } choiceDuplicate;
 
-    enum : int {
+    enum Mode : int {
         MODE_NORMAL = 0,
         MODE_DUPLICATE,
         MODE_DELETE
@@ -70,7 +70,12 @@ void pageCities(App *app) {
                         mode = MODE_DELETE;
                         break;
                     default:
-                        promptInvalidInput();
+                        if (choice >= 5 && choice <= 5 + (int)app->cities.count - 1) {
+                            // Open city.
+                        }
+                        else {
+                            promptInvalidInput();
+                        }
                         break;
                 }
                 break;

@@ -40,7 +40,7 @@ git clone https://github.com/FishChipos/Group-4-Go-FinproProgdas-CityPlanner.git
 Navigate into the new directory and type:
 
 ```bash
-make
+make compile
 ```
 
 to compile and:
@@ -50,5 +50,7 @@ make run
 ```
 
 to compile (if not already compiled) and run the project.
+
+For compilation info use `make` or `make verbose`.
 
 If there are issues with compilation, make sure that you are using the correct version of gcc with the necessary headers and libraries.

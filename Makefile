@@ -2,14 +2,17 @@
 CC = gcc
 
 # Flags.
-CFLAGS = -Isrc -Wall -Wextra
+CFLAGS = -Wall -Wextra
 LDFLAGS = -lncurses -lncursesw -DNCURSES_STATIC
 DEBUGFLAGS = -g
 
 # List of source files.
 SOURCES = \
 	main.c \
-	pages/start.c
+	cities.c \
+	pages/prompts.c \
+	pages/start.c \
+	pages/cities.c \
 
 # Parse corresponding object files.
 OBJECTS = $(foreach OBJECT,$(SOURCES:.c=.o),build/$(OBJECT))

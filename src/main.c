@@ -1,11 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
+#include "app.h"
 #include "pages/pages.h"
 
 int main() {
 
-    startPage();
-    
+    App app = { 0 };
+
+    while (!app.shouldClose) {
+        pageStart(&app);
+    }
+
     return 0;
 }

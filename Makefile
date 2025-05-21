@@ -10,6 +10,7 @@ DEBUGFLAGS = -g
 SOURCES = \
 	main.c \
 	cities.c \
+	inputparser.c \
 	pages/prompts.c \
 	pages/start.c \
 	pages/cities.c \

@@ -11,7 +11,7 @@ void printCityData(App *app, City *city) {
     printf("%-15s: %llu\n", "Transportation", city->transportation.personalTransportation + city->transportation.publicTransportation);
 }
 
-void pageTransportation(App *app, City *city) {
+void pageCityTransportation(App *app, City *city) {
     bool pageShouldClose = false;
 
     while (!pageShouldClose) {
@@ -87,6 +87,8 @@ void pageCity(App *app, City *city) {
 
         puts("1. Back\n");
         puts("2. Rename City\n");
+
+        puts("CITY DATA");
         puts("3. Population");
         puts("4. Area");
         puts("5. Transportation\n");
@@ -94,7 +96,7 @@ void pageCity(App *app, City *city) {
         printf("%s", "Choice: ");
         char buffer[128];
         fgets(buffer, 128, stdin);
-        if (buffer[0] != '\n') sscanf(buffer, "%d", (int*)&choice);
+        sscanf(buffer, "%d", (int*)&choice);
 
         puts("");
         
@@ -119,7 +121,7 @@ void pageCity(App *app, City *city) {
                 sscanf(buffer, "%lf", &city->area);
                 break;
             case TRANSPORT:
-                pageTransportation(app, city);
+                pageCityTransportation(app, city);
                 break;
             default:
                 promptInvalidInput();

@@ -46,6 +46,7 @@ void pageCities(App *app) {
                     puts("No cities yet!\n");
                 }
                 else {
+                    puts("Choose a city to view it");
                     for (size_t cityIndex = 0; cityIndex < app->cities.count; cityIndex++) {
                         printf("%llu. %s\n", cityIndex + 4 + 1, app->cities.array[cityIndex].name);
                     }
@@ -95,14 +96,13 @@ void pageCities(App *app) {
                 puts("1. Exit duplicate mode.\n");
 
                 if (app->cities.count > 0) {
+                    puts("Choose a city to \033[1;34mDUPLICATE\033[0m it");
                     for (size_t cityIndex = 0; cityIndex < app->cities.count; cityIndex++) {
                         printf("%llu. %s\n", cityIndex + 1 + 1, app->cities.array[cityIndex].name);
                     }
     
                     puts("");
                 }
-
-                puts("MODE: \033[1;34mDUPLICATE\033[0m\n");
 
                 printf("Choice: ");
                 
@@ -131,6 +131,7 @@ void pageCities(App *app) {
                 puts("1. Exit delete mode.\n");
                 
                 if (app->cities.count > 0) {
+                    puts("Choose a city to \033[1;31mDELETE\033[0m it");
                     for (size_t cityIndex = 0; cityIndex < app->cities.count; cityIndex++) {
                         printf("%llu. %s\n", cityIndex + 1 + 1, app->cities.array[cityIndex].name);
                     }
@@ -138,12 +139,10 @@ void pageCities(App *app) {
                     puts("");
                 }
 
-                puts("MODE: \033[1;31mDELETE\033[0m\n");
-
                 printf("Choice: ");
                 
                 fgets(buffer, 128, stdin);
-                if (buffer[0] != '\0') sscanf(buffer, "%d", (int*)&choiceDelete);
+                sscanf(buffer, "%d", (int*)&choiceDelete);
 
                 switch (choiceDelete) {
                     case CHOICE_DELETE_EXIT:

@@ -1,6 +1,6 @@
-#ifndef CALCULATE_H
-#define CALCULATE_H
+#ifndef CITYEVALUATION_H
+#define CITYEVALUATION_H
 
-void calculateDensity(App *app);
+int calculateDensity(City *cities);
 
 #endif

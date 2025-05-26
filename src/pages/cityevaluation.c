@@ -1,4 +1,4 @@
-#include "cityevaluation.h"
+#include "pages.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -6,6 +6,7 @@
 #include <math.h>
 #include <stdbool.h>
 
+#include "../cityevaluation.h"
 
 void pageCityEvaluation(App *app, City *city) {
     bool pageShouldClose = false;

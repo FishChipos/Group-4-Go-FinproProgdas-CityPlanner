@@ -1,6 +1,8 @@
 #ifndef CITYEVALUATION_H
 #define CITYEVALUATION_H
 
-int calculateDensity(City *cities);
+#include <stddef.h>
+
+int calculateDensity(double area, size_t population);
 
 #endif

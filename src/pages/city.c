@@ -72,10 +72,10 @@ void pageCity(App *app, City *city) {
     while (!pageShouldClose) {
         enum {
             BACK = 1,
-            RENAME,
-            POPULATION,
-            AREA,
-            TRANSPORT
+            RENAME = 2,
+            POPULATION = 3,
+            AREA = 4,
+            TRANSPORT = 5
         } choice = -1;
 
         system("clear");

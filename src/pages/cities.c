@@ -19,9 +19,9 @@ void pageCities(App *app) {
     while (!pageShouldClose) {
         enum {
             CHOICE_BACK = 1,
-            CHOICE_ADD,
-            CHOICE_DUPLICATE,
-            CHOICE_DELETE
+            CHOICE_ADD = 2,
+            CHOICE_DUPLICATE = 3,
+            CHOICE_DELETE = 4
         } choice = -1;
 
         enum {

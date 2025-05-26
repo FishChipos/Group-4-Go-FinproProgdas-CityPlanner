@@ -14,6 +14,7 @@ SOURCES = \
 	pages/start.c \
 	pages/cities.c \
 	pages/city.c \
+	pages/cityevaluation.c \
 
 # Parse corresponding object files.
 OBJECTS = $(foreach OBJECT,$(SOURCES:.c=.o),build/$(OBJECT))

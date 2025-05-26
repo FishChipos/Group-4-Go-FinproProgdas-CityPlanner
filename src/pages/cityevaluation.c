@@ -1,14 +1,9 @@
+#include "pages.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
 #include <stdbool.h>
-#include "pages.h"
-
-typedef struct {
-    float area;
-    unsigned long long population;
-} City;
 
 int calculateDensity(float area, unsigned long long population) {
     if (area <= 0) return 0;

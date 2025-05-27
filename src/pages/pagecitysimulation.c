@@ -1,0 +1,124 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include <string.h>
+#include "pages.h"
+#include "../citysimulation.h"
+
+void pageCitySimulation(App *app, City *city) {
+    bool pageClosed = false;
+    int choice;
+
+    if (city->name == NULL || city->population == 0 || city->area <= 0) {
+        printf("City data is incomplete.\n");
+        promptInvalidInput();
+        return;
+    }
+
+    while (!pageClosed) {
+        printf("\nCITY SIMULATION\n");
+        printf("1. Simulate City\n");
+        printf("2. View logs\n");
+        printf("3. Back\n");
+        printf("Choice: ");
+
+        scanf("%d", &choice);
+        while (getchar() != '\n'); //Clear input buffer
+
+        switch (choice) {
+            case 1: {
+                int years = 0;
+                double growthRate = 0.0;
+                printf("How many years you want to simulate: ");
+                if (scanf("%d", &years) != 1 || years <= 0) {
+                    printf("Invalid year input.\n");
+                    while (getchar() != '\n');
+                    break;
+                }
+                while (getchar() != '\n');
+
+                printf("Enter population growth rate (in percent, e.g. 2 for 2%%): ");
+                if (scanf("%lf", &growthRate) != 1) {
+                    printf("Invalid growth rate input.\n");
+                    while (getchar() != '\n');
+                    break;
+                }
+                while (getchar() != '\n');
+
+                int resultCount = 0;
+                CitySimulationResult *results = simulateCity(city, years, &resultCount, growthRate);
+
+                if (!results) {
+                    printf("Simulation failed.\n");
+                    break;
+                }
+
+                printf("\nPopulation:\n");
+                for (int i = 0; i < resultCount; i++) {
+                    printf("Year %d: Population = %zu\n", results[i].year, results[i].population);
+                }
+
+                //Save results confirmation
+                char save;
+                printf("Save it to log? (y/n): ");
+                scanf(" %c", &save);
+                while (getchar() != '\n');
+                if (save == 'y' || save == 'Y') {
+
+                    //Count existing logs
+                    int logsCount = 0;
+                    FILE *logFile = fopen("simulation_logs.txt", "r");
+                    if (logFile) {
+                        char line[256];
+                        while (fgets(line, sizeof(line), logFile)) {
+                            if (strncmp(line, "Simulation", 10) == 0) {
+                                logsCount++;
+                            }
+                        }
+                        fclose(logFile);
+                    }
+                    logsCount++;
+                    
+                    //Save results to file
+                    FILE *f = fopen("simulation_logs.txt", "a");
+                    if (f) {
+                        fprintf(f, "Simulation %d for %s:\n", logsCount, city->name);
+                        for (int i = 0; i < resultCount; i++) {
+                            fprintf(f, "Year %d: Population = %zu\n", results[i].year, results[i].population);
+                        }
+                        fprintf(f, "\n");
+                        fclose(f);
+                        printf("Simulation saved.\n");
+                    } else {
+                        printf("Failed to save simulation.\n");
+                    }
+                }
+
+                free(results);
+                promptContinue();
+                break;
+            }
+            case 2:
+                printf("Simulation logs\n");
+                FILE *f = fopen("simulation_logs.txt", "r");
+                if (f) {
+                    char line[256];
+                    while (fgets(line, sizeof(line), f)) {
+                        printf("%s", line);
+                    }
+                    fclose(f);
+                } else {
+                    printf("No simulation archive yet.\n");
+                }
+                promptContinue();
+                break;
+            case 3:
+                pageClosed = true;
+                break;
+            default:
+                printf("Invalid Choice.\n");
+                promptInvalidInput();
+                break;
+        }
+    }
+}

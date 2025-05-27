@@ -13,5 +13,6 @@ int main() {
         pageStart(&app);
     }
 
+    remove("simulation_logs.txt"); // Clean up log file on exit
     return 0;
 }

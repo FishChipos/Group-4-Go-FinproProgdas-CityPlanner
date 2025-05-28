@@ -24,7 +24,25 @@ void pageCityEvaluation(App *app, City *city) {
         // Print UI including evaluation results.
         printf("\033[1m--- CITY - EVALUATION ---\033[0m\n");
     
-        printf("City Population Density: %f\n", populationDensity);
+        printf("City Population Density: %f people/km^2\n", populationDensity);
+        printf("Score: %f%\n\n", scorePopulationDensity(city->area, city->population));
+
+        printf("People per public transportation: %f\n", city->population/city->transportation.publicTransportation);
+        printf("Score: %f%\n\n", scorePublicTransportation(city->transportation.publicTransportation, city->population));
+
+        printf("People per personal transportation: %f\n", city->population/city->transportation.personalTransportation);
+        printf("Score: %f%\n\n", scorePersonalTransportation(city->transportation.personalTransportation, city->population));
+        
+        printf("Consumption: %f L\n", city->population*100);
+        printf("Rasio of supply to consumption: %f%\n", city->waterSupply/(city->population*100)*100);
+        printf("Score: %f%\n\n", scoreWater(city->waterSupply, city->population*100));
+
+        printf("People per school: %f\n", city->population/city->education);
+        printf("Score: %f%\n\n", scoreEducation(city->education, city->population));
+        
+        printf("People per hospital: %f\n", city->population/city->hospital);
+        printf("Score: %f%\n\n", scoreHospital(city->hospital, city->population));
+
         puts("");
         puts("1. Back\n");
 

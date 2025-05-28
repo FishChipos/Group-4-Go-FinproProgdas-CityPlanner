@@ -8,6 +8,9 @@ typedef struct {
     char *name;
     size_t population;
     double area;
+    double waterSupply;
+    size_t education;
+    size_t hospital;
     struct {
         size_t publicTransportation;
         size_t personalTransportation;

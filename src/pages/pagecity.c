@@ -54,13 +54,13 @@ void pageCityTransportation(App *app, City *city) {
                 break;
             case PUBLIC:
                 // Change public transportation data.
-                printf("%s", "Enter number of vehicles: ");
+                printf("%s", "Enter number of units: ");
                 fgets(buffer, 128, stdin);
                 sscanf(buffer, "%llu", &city->transportation.publicTransportation);
                 break;
             case PERSONAL:
                 // Change personal transportation data.
-                printf("%s", "Enter number of vehicles: ");
+                printf("%s", "Enter number of units: ");
                 fgets(buffer, 128, stdin);
                 sscanf(buffer, "%llu", &city->transportation.personalTransportation);
                 break;

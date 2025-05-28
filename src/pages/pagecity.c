@@ -10,6 +10,9 @@ void printCityData(App *app, City *city) {
     printf("%-15s: %llu %s\n", "Population", city->population, city->population == 1 ? "person" : "people");
     printf("%-15s: %.2lf m^2\n", "Area", city->area);
     printf("%-15s: %llu\n", "Transportation", city->transportation.personalTransportation + city->transportation.publicTransportation);
+    printf("%-15s: %.2lf L\n", "Water Supply", city->waterSupply);
+    printf("%-15s: %llu unit\n", "School", city->education);
+    printf("%-15s: %llu unit\n", "Hospital", city->hospital);
 }
 
 // Displays subpage for city transportation data.
@@ -85,6 +88,9 @@ void pageCity(App *app, City *city) {
             POPULATION = 5,
             AREA = 6,
             TRANSPORT = 7,
+            WATER = 8,
+            EDUCATION = 9,
+            HOSPITAL = 10,
         } choice = -1;
 
         system("clear");
@@ -106,7 +112,10 @@ void pageCity(App *app, City *city) {
         puts("Choose a category to view and edit data");
         puts("5. Population");
         puts("6. Area");
-        puts("7. Transportation\n");
+        puts("7. Transportation");
+        puts("8. Water Supply");
+        puts("9. School");
+        puts("10. Hospital\n");
 
         printf("%s", "Choice: ");
         char buffer[128];
@@ -151,6 +160,24 @@ void pageCity(App *app, City *city) {
             case TRANSPORT:
                 // Navigate to the transportation subpage for this city.
                 pageCityTransportation(app, city);
+                break;
+            case WATER:
+                // Ask for new water supply.
+                printf("%s", "Enter water supply for city: ");
+                fgets(buffer, 128, stdin);
+                sscanf(buffer, "%lf", &city->waterSupply);
+                break;
+            case EDUCATION:
+                // Ask for new education availability building.
+                printf("%s", "Enter numbers of school for city: ");
+                fgets(buffer, 128, stdin);
+                sscanf(buffer, "%llu", &city->education);
+                break;
+            case HOSPITAL:
+                // Ask for new healthcare availability building.
+                printf("%s", "Enter numbers of hospital for city: ");
+                fgets(buffer, 128, stdin);
+                sscanf(buffer, "%llu", &city->hospital);
                 break;
             default:
                 // Invalid input.

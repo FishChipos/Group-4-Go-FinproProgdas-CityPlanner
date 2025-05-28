@@ -75,7 +75,7 @@ void pageCity(App *app, City *city) {
             RENAME = 2,
             POPULATION = 3,
             AREA = 4,
-            TRANSPORT = 5
+            TRANSPORT = 5,
             EVALUATION = 6
         } choice = -1;
 

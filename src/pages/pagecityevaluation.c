@@ -13,7 +13,7 @@ void pageCityEvaluation(App *app, City *city) {
 
     while (!pageShouldClose) {
         enum {
-            BACK = 1;
+            BACK = 1,
         } choice = -1;
 
         system("clear");

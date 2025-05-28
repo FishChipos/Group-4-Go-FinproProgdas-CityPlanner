@@ -13,11 +13,11 @@ CitySimulationResult* simulateCity(const City *city, int years, int *resultCount
         return NULL;
     }
 
-    size_t population = city->population;
+    double population = (double)city->population;
     for (int i = 0; i < years; i++) {
-        population = (size_t)(population * (1.0 + growthRate / 100.0));
+        population = population * (1.0 + growthRate / 100.0);
         results[i].year = i + 1;
-        results[i].population = population;
+        results[i].population = (size_t)population;
     }
     *resultCount = years;
     return results;

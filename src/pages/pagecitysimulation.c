@@ -9,8 +9,9 @@ void pageCitySimulation(App *app, City *city) {
     bool pageClosed = false;
     int choice;
 
+    // If city data is incomplete then return.
     if (city->name == NULL || city->population == 0 || city->area <= 0) {
-        printf("City data is incomplete.\n");
+        printf("\nCity data is incomplete.\n");
         promptInvalidInput();
         return;
     }
@@ -18,6 +19,7 @@ void pageCitySimulation(App *app, City *city) {
     while (!pageClosed) {
         system("clear");
 
+        // Print UI.
         printf("\033[1m--- CITY - SIMULATION ---\033[0m\n");
         printf("1. Back\n\n");
         printf("2. Simulate City\n");
@@ -28,9 +30,11 @@ void pageCitySimulation(App *app, City *city) {
         while (getchar() != '\n'); //Clear input buffer
 
         switch (choice) {
+            // Go back.
             case 1:
                 pageClosed = true;
                 break;
+            // Simulate city.
             case 2: {
                 int years = 0;
                 double growthRate = 0.0;
@@ -103,6 +107,7 @@ void pageCitySimulation(App *app, City *city) {
                 promptContinue();
                 break;
             }
+            // View simulation logs.
             case 3:
                 printf("Simulation logs\n");
                 FILE *f = fopen("simulation_logs.txt", "r");

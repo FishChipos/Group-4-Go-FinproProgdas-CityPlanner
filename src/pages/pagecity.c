@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+// Prints the overall data for a city.
 void printCityData(App *app, City *city) {
     printf("\033[1;5;33m%s\033[0m\n", city->name);
     printf("%-15s: %llu %s\n", "Population", city->population, city->population == 1 ? "person" : "people");
@@ -11,10 +12,12 @@ void printCityData(App *app, City *city) {
     printf("%-15s: %llu\n", "Transportation", city->transportation.personalTransportation + city->transportation.publicTransportation);
 }
 
+// Displays subpage for city transportation data.
 void pageCityTransportation(App *app, City *city) {
     bool pageShouldClose = false;
 
     while (!pageShouldClose) {
+        // Possible choices.
         enum {
             BACK = 1,
             PUBLIC,
@@ -23,6 +26,7 @@ void pageCityTransportation(App *app, City *city) {
 
         system("clear");
 
+        // Print UI.
         puts("\033[1m--- CITY - TRANSPORTATION ---\033[0m");
         printCityData(app, city);
 
@@ -49,11 +53,13 @@ void pageCityTransportation(App *app, City *city) {
                 pageShouldClose = true;
                 break;
             case PUBLIC:
+                // Change public transportation data.
                 printf("%s", "Enter number of vehicles: ");
                 fgets(buffer, 128, stdin);
                 sscanf(buffer, "%llu", &city->transportation.publicTransportation);
                 break;
             case PERSONAL:
+                // Change personal transportation data.
                 printf("%s", "Enter number of vehicles: ");
                 fgets(buffer, 128, stdin);
                 sscanf(buffer, "%llu", &city->transportation.personalTransportation);
@@ -70,6 +76,7 @@ void pageCity(App *app, City *city) {
     bool pageShouldClose = false;
 
     while (!pageShouldClose) {
+        // Possible choices.
         enum {
             BACK = 1,
             RENAME = 2,
@@ -82,6 +89,7 @@ void pageCity(App *app, City *city) {
 
         system("clear");
 
+        // Print UI.
         puts("\033[1m--- CITY ---\033[0m");
         printCityData(app, city);
 
@@ -102,6 +110,8 @@ void pageCity(App *app, City *city) {
 
         printf("%s", "Choice: ");
         char buffer[128];
+
+        // Get user input.
         fgets(buffer, 128, stdin);
         sscanf(buffer, "%d", (int*)&choice);
 
@@ -112,31 +122,38 @@ void pageCity(App *app, City *city) {
                 pageShouldClose = true;
                 break;
             case RENAME:
+                // Rename the city after asking for a new one.
                 printf("%s", "Enter city name: ");
                 fgets(buffer, 128, stdin);
                 buffer[strcspn(buffer, "\n\r")] = '\0';
                 renameCity(city, buffer, 128);
                 break;
             case EVALUATION:
+                // Navigate to the evaluation page for this city.
                 pageCityEvaluation(app, city);
                 break;
             case SIMULATION:
+                // Navigate to the simulation page for this city.
                 pageCitySimulation(app, city);
                 break;
             case POPULATION:
+                // Ask for new population.
                 printf("%s", "Enter city population: ");
                 fgets(buffer, 128, stdin);
                 sscanf(buffer, "%llu", &city->population);
                 break;
             case AREA:
+                // Ask for new area.
                 printf("%s", "Enter city area: ");
                 fgets(buffer, 128, stdin);
                 sscanf(buffer, "%lf", &city->area);
                 break;
             case TRANSPORT:
+                // Navigate to the transportation subpage for this city.
                 pageCityTransportation(app, city);
                 break;
             default:
+                // Invalid input.
                 promptInvalidInput();
                 break;
         }

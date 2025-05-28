@@ -3,6 +3,7 @@
 
 #include <stddef.h>
 
-int calculateDensity(double area, size_t population);
+// Calculates the population density in a given area.
+double calculatePopulationDensity(double area, size_t population);
 
 #endif

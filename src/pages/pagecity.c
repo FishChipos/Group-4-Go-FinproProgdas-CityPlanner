@@ -40,7 +40,7 @@ void pageCityTransportation(App *app, City *city) {
 
         puts("");
 
-        puts("1. Back\n");
+        puts("\033[1;91m1. Back\033[0m\n");
         puts("2. Public");
         puts("3. Personal\n");
 
@@ -101,7 +101,7 @@ void pageCity(App *app, City *city) {
 
         puts("");
 
-        puts("1. Back\n");
+        puts("\033[1;91m1. Back\033[0m\n");
 
         puts("\033[1mCITY ACTIONS\033[0m");
         puts("2. Rename City");

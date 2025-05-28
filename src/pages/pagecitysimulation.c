@@ -21,7 +21,7 @@ void pageCitySimulation(App *app, City *city) {
 
         // Print UI.
         printf("\033[1m--- CITY - SIMULATION ---\033[0m\n");
-        printf("1. Back\n\n");
+        printf("\033[1;91m1. Back\033[0m\n\n");
         printf("2. Simulate City\n");
         printf("3. View logs\n\n");
         printf("Choice: ");

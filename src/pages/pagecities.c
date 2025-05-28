@@ -43,7 +43,7 @@ void pageCities(App *app) {
             case MODE_NORMAL:
                 // Print normal mode UI.
                 puts("\033[1m--- CITIES ---\033[0m");
-                puts("1. Back\n");
+                puts("\033[1;91m1. Back\033[0m\n");
 
                 puts("\033[1mACTIONS\033[0m");
                 puts("2. Add city");

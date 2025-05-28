@@ -8,7 +8,7 @@
 
 #include "../cityevaluation.h"
 
-void pageCityEvaluation(App *app, City *city) {
+int pageCityEvaluation(App *app, City *city) {
     bool pageShouldClose = false;
 
     while (!pageShouldClose) {

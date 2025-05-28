@@ -5,7 +5,7 @@
 #include <string.h>
 
 void printCityData(App *app, City *city) {
-    printf("\n\033[1;5;32m%s\033[0m\n", city->name);
+    printf("\033[1;5;33m%s\033[0m\n", city->name);
     printf("%-15s: %llu %s\n", "Population", city->population, city->population == 1 ? "person" : "people");
     printf("%-15s: %.2lf m^2\n", "Area", city->area);
     printf("%-15s: %llu\n", "Transportation", city->transportation.personalTransportation + city->transportation.publicTransportation);
@@ -73,11 +73,11 @@ void pageCity(App *app, City *city) {
         enum {
             BACK = 1,
             RENAME = 2,
-            POPULATION = 3,
-            AREA = 4,
-            TRANSPORT = 5,
-            EVALUATION = 6,
-            SIMULATION = 7
+            EVALUATION = 3,
+            SIMULATION = 4,
+            POPULATION = 5,
+            AREA = 6,
+            TRANSPORT = 7,
         } choice = -1;
 
         system("clear");
@@ -88,14 +88,17 @@ void pageCity(App *app, City *city) {
         puts("");
 
         puts("1. Back\n");
-        puts("2. Rename City\n");
 
-        puts("CITY DATA");
-        puts("3. Population");
-        puts("4. Area");
-        puts("5. Transportation");
-        puts("6. Evaluation\n");
-        puts("7. Simulation\n");
+        puts("\033[1mCITY ACTIONS\033[0m");
+        puts("2. Rename City");
+        puts("3. Evaluate City");
+        puts("4. Simulate City\n");
+
+        puts("\033[1mCITY DATA\033[0m");
+        puts("Choose a category to view and edit data");
+        puts("5. Population");
+        puts("6. Area");
+        puts("7. Transportation\n");
 
         printf("%s", "Choice: ");
         char buffer[128];
@@ -114,6 +117,12 @@ void pageCity(App *app, City *city) {
                 buffer[strcspn(buffer, "\n\r")] = '\0';
                 renameCity(city, buffer, 128);
                 break;
+            case EVALUATION:
+                pageCityEvaluation(app, city);
+                break;
+            case SIMULATION:
+                pageCitySimulation(app, city);
+                break;
             case POPULATION:
                 printf("%s", "Enter city population: ");
                 fgets(buffer, 128, stdin);
@@ -126,12 +135,6 @@ void pageCity(App *app, City *city) {
                 break;
             case TRANSPORT:
                 pageCityTransportation(app, city);
-                break;
-            case EVALUATION:
-                pageCityEvaluation(app, city);
-                break;
-            case SIMULATION:
-                pageCitySimulation(app, city);
                 break;
             default:
                 promptInvalidInput();

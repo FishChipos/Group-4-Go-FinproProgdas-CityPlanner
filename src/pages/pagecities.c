@@ -38,10 +38,13 @@ void pageCities(App *app) {
             case MODE_NORMAL:
                 puts("\033[1m--- CITIES ---\033[0m");
                 puts("1. Back\n");
+
+                puts("\033[1mACTIONS\033[0m");
                 puts("2. Add city");
                 puts("3. Duplicate city");
                 puts("4. Delete city\n");
-                                
+                
+                puts("\033[1mYOUR CITIES\033[0m");
                 if (app->cities.count <= 0) {
                     puts("No cities yet!\n");
                 }

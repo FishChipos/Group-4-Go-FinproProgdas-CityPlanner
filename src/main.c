@@ -13,6 +13,7 @@ int main() {
         pageStart(&app);
     }
 
+    system("clear"); // Clear terminal on exit.
     remove("simulation_logs.txt"); // Clean up log file on exit
     return 0;
 }

@@ -11,11 +11,13 @@ SOURCES = \
 	main.c \
 	cities.c \
 	cityevaluation.c \
+	citysimulation.c \
 	pages/prompts.c \
 	pages/pagestart.c \
 	pages/pagecities.c \
 	pages/pagecity.c \
 	pages/pagecityevaluation.c \
+	pages/pagecitysimulation.c \
 
 # Parse corresponding object files.
 OBJECTS = $(foreach OBJECT,$(SOURCES:.c=.o),build/$(OBJECT))

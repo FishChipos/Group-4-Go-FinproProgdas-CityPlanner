@@ -11,6 +11,10 @@ void pageCity(App *app, City *city);
 
 void pageCityEvaluation(App *app, City *city);
 
+void pageCitySimulation(App *app, City *city);
+
 void promptInvalidInput();
+
+void promptContinue();
 
 #endif

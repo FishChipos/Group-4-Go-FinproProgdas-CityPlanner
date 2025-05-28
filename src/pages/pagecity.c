@@ -76,7 +76,8 @@ void pageCity(App *app, City *city) {
             POPULATION = 3,
             AREA = 4,
             TRANSPORT = 5,
-            EVALUATION = 6
+            EVALUATION = 6,
+            SIMULATION = 7
         } choice = -1;
 
         system("clear");
@@ -94,6 +95,7 @@ void pageCity(App *app, City *city) {
         puts("4. Area");
         puts("5. Transportation");
         puts("6. Evaluation\n");
+        puts("7. Simulation\n");
 
         printf("%s", "Choice: ");
         char buffer[128];
@@ -127,6 +129,9 @@ void pageCity(App *app, City *city) {
                 break;
             case EVALUATION:
                 pageCityEvaluation(app, city);
+                break;
+            case SIMULATION:
+                pageCitySimulation(app, city);
                 break;
             default:
                 promptInvalidInput();

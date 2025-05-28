@@ -7,3 +7,9 @@ void promptInvalidInput() {
     fflush(stdin);
     getchar();
 }
+
+void promptContinue() {
+    printf("%s", "Press ENTER to continue.");
+    fflush(stdin);
+    getchar();
+}

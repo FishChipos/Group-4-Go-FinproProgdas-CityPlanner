@@ -14,19 +14,24 @@ void pageCitySimulation(App *app, City *city) {
         promptInvalidInput();
         return;
     }
-
+    
     while (!pageClosed) {
-        printf("\nCITY SIMULATION\n");
-        printf("1. Simulate City\n");
-        printf("2. View logs\n");
-        printf("3. Back\n");
+        system("clear");
+
+        printf("\033[1m--- CITY - SIMULATION ---\033[0m\n");
+        printf("1. Back\n\n");
+        printf("2. Simulate City\n");
+        printf("3. View logs\n\n");
         printf("Choice: ");
 
         scanf("%d", &choice);
         while (getchar() != '\n'); //Clear input buffer
 
         switch (choice) {
-            case 1: {
+            case 1:
+                pageClosed = true;
+                break;
+            case 2: {
                 int years = 0;
                 double growthRate = 0.0;
                 printf("How many years you want to simulate: ");
@@ -98,7 +103,7 @@ void pageCitySimulation(App *app, City *city) {
                 promptContinue();
                 break;
             }
-            case 2:
+            case 3:
                 printf("Simulation logs\n");
                 FILE *f = fopen("simulation_logs.txt", "r");
                 if (f) {
@@ -111,9 +116,6 @@ void pageCitySimulation(App *app, City *city) {
                     printf("No simulation archive yet.\n");
                 }
                 promptContinue();
-                break;
-            case 3:
-                pageClosed = true;
                 break;
             default:
                 printf("Invalid Choice.\n");

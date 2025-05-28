@@ -18,12 +18,11 @@ void pageCityEvaluation(App *app, City *city) {
 
         system("clear");
     
-        printf("\nCity Evaluation\n");
-        puts("");
+        printf("\033[1m--- CITY - EVALUATION ---\033[0m\n");
     
         int score = calculateDensity(city->area, city->population);
 
-        printf("City Density: %d\n", score);
+        printf("City Population Density: %d\n", score);
         puts("");
         puts("1. Back\n");
 

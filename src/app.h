@@ -3,7 +3,7 @@
 
 #include <stdbool.h>
 
-#include "cities.h"
+#include "systems/cities.h"
 
 // Struct containing the state of the app.
 typedef struct {

@@ -3,15 +3,15 @@ CC = gcc
 
 # Flags.
 CFLAGS = -std=c99 -Wall -Wextra
-LDFLAGS =
-DEBUGFLAGS = -g
+LDFLAGS = 
+DEBUGFLAGS = 
 
 # List of source files.
 SOURCES = \
 	main.c \
-	cities.c \
-	cityevaluation.c \
-	citysimulation.c \
+	systems/cities.c \
+	systems/cityevaluation.c \
+	systems/citysimulation.c \
 	pages/prompts.c \
 	pages/pagestart.c \
 	pages/pagecities.c \

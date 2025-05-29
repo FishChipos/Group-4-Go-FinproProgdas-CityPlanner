@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../citysimulation.h"
+#include "../systems/citysimulation.h"
 
 void pageCitySimulation(App *app, City *city) {
     bool pageClosed = false;

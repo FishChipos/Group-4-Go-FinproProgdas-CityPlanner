@@ -10,6 +10,7 @@
 void pageCitySimulation(App *app, City *city) {
     bool pageClosed = false;
     int choice;
+    char buffer[128];
 
     // If city data is incomplete then return.
     if (city->name == NULL || city->population == 0 || city->area <= 0) {
@@ -28,8 +29,8 @@ void pageCitySimulation(App *app, City *city) {
         printf("3. View logs\n\n");
         printf("Choice: ");
 
-        scanf("%d", &choice);
-        while (getchar() != '\n'); //Clear input buffer
+        fgets(buffer, 128, stdin);
+        sscanf(buffer, "%d", (int*)&choice);
 
         switch (choice) {
             // Go back.

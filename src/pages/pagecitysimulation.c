@@ -1,8 +1,10 @@
+#include "pages.h"
+
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
-#include "pages.h"
+
 #include "../citysimulation.h"
 
 void pageCitySimulation(App *app, City *city) {

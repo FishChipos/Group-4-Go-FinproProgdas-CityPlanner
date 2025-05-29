@@ -12,6 +12,9 @@ void pageCities(App *app);
 // Displays the page for a city.
 void pageCity(App *app, City *city);
 
+// Prints data for a city.
+void printCityData(App *app, City *city);
+
 // Displays the page for an evaluation of a city.
 void pageCityEvaluation(App *app, City *city);
 

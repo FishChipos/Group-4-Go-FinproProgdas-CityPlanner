@@ -3,13 +3,13 @@
 #include <stdio.h>
 
 void promptInvalidInput() {
-    printf("%s", "Invalid input! Press ENTER to continue.");
+    printf("%s", "Invalid input! Press \033[1mENTER\033[0m to continue.");
     fflush(stdin);
     getchar();
 }
 
 void promptContinue() {
-    printf("%s", "Press ENTER to continue.");
+    printf("%s", "Press \033[1mENTER\033[0m to continue.");
     fflush(stdin);
     getchar();
 }

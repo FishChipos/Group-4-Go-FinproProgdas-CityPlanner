@@ -21,10 +21,10 @@ void pageCitySimulation(App *app, City *city) {
 
         // Print UI.
         printf("\033[1m--- CITY - SIMULATION ---\033[0m\n");
-        printf("\033[1;91m1. Back\033[0m\n\n");
-        printf("2. Simulate City\n");
-        printf("3. View logs\n\n");
-        printf("Choice: ");
+        printf("\033[91m1. Back\033[0m\n\n");
+        printf("\033[94m2. Simulate City\n");
+        printf("3. View logs\033[0m\n\n");
+        printf("\033[2mChoice: \033[0m");
 
         scanf("%d", &choice);
         while (getchar() != '\n'); //Clear input buffer

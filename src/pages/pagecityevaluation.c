@@ -1,5 +1,4 @@
 #include "pages.h"
-#include "pagecity.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,9 +11,48 @@
 void pageCityEvaluation(App *app, City *city) {
     bool pageShouldClose = false;
 
-    // Calculate the population density for this city.
-    double populationDensity = calculatePopulationDensity(city->area, city->population);
+    // In the future, probably figure out a cleaner way to do this,
+    // Likely by splitting calculation and output into two different functions.
 
+    // Calculate water consumption.
+    double waterConsumption = city->population * 100;
+
+    // Necessary figures to output.
+    double populationDensity;
+    double peoplePerPublicTransportationUnit;
+    double peoplePerPersonalTransportationUnit;
+    double waterSupplyToConsumptionRatio;
+    double peoplePerSchool;
+    double peoplePerHospital;
+
+    // Calculate scores.
+    struct {
+        double populationDensity;
+        double publicTransportation;
+        double personalTransportation;
+        double waterSupply;
+        double education;
+        double healthcare;
+    } scores = {
+        .populationDensity = scorePopulationDensity(city->area, city->population, &populationDensity),
+        .publicTransportation = scorePublicTransportation(city->transportation.publicTransportation, city->population, &peoplePerPublicTransportationUnit),
+        .personalTransportation = scorePersonalTransportation(city->transportation.personalTransportation, city->population, &peoplePerPersonalTransportationUnit),
+        .waterSupply = scoreWaterSupply(city->waterSupply, waterConsumption, &waterSupplyToConsumptionRatio),
+        .education = scoreEducation(city->schools, city->population, &peoplePerSchool),
+        .healthcare = scoreHealthcare(city->hospitals, city->population, &peoplePerHospital)
+    };
+
+    // Calculate the average score.
+    double averageScore = 0;
+    size_t scoreCount = 0;
+
+    for (double *ptrScore = &scores.populationDensity; ptrScore <= &scores.healthcare; ptrScore++) {
+        averageScore += *ptrScore;
+        scoreCount++;
+    }
+
+    averageScore /= scoreCount;
+    
     while (!pageShouldClose) {
         enum {
             BACK = 1,
@@ -27,29 +65,30 @@ void pageCityEvaluation(App *app, City *city) {
 
         printCityData(app, city);
     
-        printf("City Population Density: %.2f people/km^2\n", populationDensity);
-        printf("Score: %.2f %\n\n", scorePopulationDensity(city->area, city->population));
+        printf("\nCity Population Density: %.2f people/km^2\n", populationDensity);
+        printf("Score: %.2f\n\n", scores.populationDensity);
 
-        printf("People per public transportation: %llu\n", city->population/city->transportation.publicTransportation);
-        printf("Score: %.2f %\n\n", scorePublicTransportation(city->transportation.publicTransportation, city->population));
+        printf("People per public transportation unit: %.2f\n", peoplePerPublicTransportationUnit);
+        printf("Score: %.2f\n\n", scores.publicTransportation);
 
-        printf("People per personal transportation: %llu\n", city->population/city->transportation.personalTransportation);
-        printf("Score: %.2f %\n\n", scorePersonalTransportation(city->transportation.personalTransportation, city->population));
+        printf("People per personal transportation unit: %.2f\n", peoplePerPersonalTransportationUnit);
+        printf("Score: %.2f\n\n", scores.personalTransportation);
         
-        printf("Consumption: %llu L\n", city->population*100);
-        printf("Rasio of supply to consumption: %.2f %\n", city->waterSupply/(city->population*100)*100);
-        printf("Score: %.2f %\n\n", scoreWater(city->waterSupply, city->population*100));
+        printf("Water consumption per day: %.0f L\n", waterConsumption);
+        printf("Ratio of supply to consumption per day: %.2f%%\n", waterSupplyToConsumptionRatio * 100);
+        printf("Score: %.2f\n\n", scores.waterSupply);
 
-        printf("People per school: %llu\n", city->population/city->education);
-        printf("Score: %.2f %\n\n", scoreEducation(city->education, city->population));
+        printf("People per school: %.2f\n", peoplePerSchool);
+        printf("Score: %.2f\n\n", scores.education);
         
-        printf("People per hospital: %llu\n", city->population/city->hospital);
-        printf("Score: %.2f %\n\n", scoreHospital(city->hospital, city->population));
+        printf("People per hospital: %.2f\n", peoplePerHospital);
+        printf("Score: %.2f\n\n", scores.healthcare);
 
-        puts("");
-        puts("\033[1;91m1. Back\033[0m\n");
+        printf("Average Score: %.2f\n\n", averageScore);
 
-        printf("%s", "Choice: ");
+        puts("\033[91m1. Back\033[0m\n");
+
+        printf("%s", "\033[2mChoice: \033[0m");
         char buffer[128];
 
         // Get user input.

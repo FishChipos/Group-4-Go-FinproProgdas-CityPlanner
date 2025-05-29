@@ -69,7 +69,7 @@ void pageCitySimulation(App *app, City *city) {
 
                 //Save results confirmation
                 char save;
-                printf("Save it to log? (y/n): ");
+                printf("\nSave it to log? (y/n): ");
                 scanf(" %c", &save);
                 while (getchar() != '\n');
                 if (save == 'y' || save == 'Y') {
@@ -109,7 +109,7 @@ void pageCitySimulation(App *app, City *city) {
             }
             // View simulation logs.
             case 3:
-                printf("Simulation logs\n");
+                printf("\nSimulation logs\n");
                 FILE *f = fopen("simulation_logs.txt", "r");
                 if (f) {
                     char line[256];

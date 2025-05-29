@@ -84,7 +84,23 @@ void pageCityEvaluation(App *app, City *city) {
         printf("People per hospital: %.2f\n", peoplePerHospital);
         printf("Score: %.2f\n\n", scores.healthcare);
 
-        printf("Average Score: %.2f\n\n", averageScore);
+        printf("Average Score: %.2f\n", averageScore);
+
+        // Print city quality.
+        printf("City Quality: \033[1m");
+        if (averageScore >= 75) {
+            printf("\033[34mGREAT");
+        }
+        else if (averageScore >= 50) {
+            printf("\033[32mGOOD");
+        }
+        else if (averageScore >= 25) {
+            printf("\033[33mPASSING");
+        }
+        else {
+            printf("\033[31mPOOR");
+        }
+        puts("\033[0m\n");
 
         puts("\033[91m1. Back\033[0m\n");
 

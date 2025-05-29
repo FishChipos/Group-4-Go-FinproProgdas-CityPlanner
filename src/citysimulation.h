@@ -10,6 +10,8 @@ typedef struct {
     size_t population;
 } CitySimulationResult;
 
+// Simulates a city and returns a pointer to the array of results.
+// Rate of growth is growthRate%.
 CitySimulationResult* simulateCity(const City *city, int years, int *resultCount, double growthRate);
 
 #endif

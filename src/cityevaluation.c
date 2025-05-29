@@ -5,13 +5,12 @@
 #include <math.h>
 #include <stdbool.h>
 
-int calculateDensity(double area, size_t population) {
+double calculatePopulationDensity(double area, size_t population) {
+    // If area is 0 or less then return 0.
     if (area <= 0) return 0;
 
+    // Calculate density.
     double density = population / area;
 
-    if (density <= 5000) return 100;
-    else if (density <= 8000) return 75;
-    else if (density <= 10000) return 50;
-    else return 25;
+    return density;
 }

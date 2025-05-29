@@ -25,7 +25,7 @@ typedef struct {
 void addCity(Cities *cities, City city);
 // Deletes a city at a given index in the cities array.
 void deleteCity(Cities *cities, size_t index);
-
+// Renames a city given a new name and length.
 void renameCity(City *city, char* newName, size_t length);
 
 #endif

@@ -1,8 +1,10 @@
+#include "pages.h"
+
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
-#include "pages.h"
+
 #include "../citysimulation.h"
 
 void pageCitySimulation(App *app, City *city) {
@@ -10,24 +12,33 @@ void pageCitySimulation(App *app, City *city) {
     int choice;
     char buffer[128];
 
+    // If city data is incomplete then return.
     if (city->name == NULL || city->population == 0 || city->area <= 0) {
-        printf("City data is incomplete.\n");
+        printf("\nCity data is incomplete.\n");
         promptInvalidInput();
         return;
     }
-
+    
     while (!pageClosed) {
-        printf("\nCITY SIMULATION\n");
-        printf("1. Simulate City\n");
-        printf("2. View logs\n");
-        printf("3. Back\n");
+        system("clear");
+
+        // Print UI.
+        printf("\033[1m--- CITY - SIMULATION ---\033[0m\n");
+        printf("1. Back\n\n");
+        printf("2. Simulate City\n");
+        printf("3. View logs\n\n");
         printf("Choice: ");
 
         fgets(buffer, 128, stdin);
         sscanf(buffer, "%d", (int*)&choice);
 
         switch (choice) {
-            case 1: {
+            // Go back.
+            case 1:
+                pageClosed = true;
+                break;
+            // Simulate city.
+            case 2: {
                 int years = 0;
                 double growthRate = 0.0;
                 printf("How many years you want to simulate: ");
@@ -99,7 +110,8 @@ void pageCitySimulation(App *app, City *city) {
                 promptContinue();
                 break;
             }
-            case 2:
+            // View simulation logs.
+            case 3:
                 printf("Simulation logs\n");
                 FILE *f = fopen("simulation_logs.txt", "r");
                 if (f) {
@@ -112,9 +124,6 @@ void pageCitySimulation(App *app, City *city) {
                     printf("No simulation archive yet.\n");
                 }
                 promptContinue();
-                break;
-            case 3:
-                pageClosed = true;
                 break;
             default:
                 printf("Invalid Choice.\n");

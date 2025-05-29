@@ -3,7 +3,7 @@ CC = gcc
 
 # Flags.
 CFLAGS = -std=c99 -Wall -Wextra
-LDFLAGS = 
+LDFLAGS =
 DEBUGFLAGS = -g
 
 # List of source files.

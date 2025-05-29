@@ -7,7 +7,7 @@ Group 4's final project submission for Pemrograman Dasar.
 1. Alwahib Raffi Raihan, 2406397630, alwahibrr
 2. Carlsson Khovis, 2406347853, FishChipos
 3. Muhammad Dhiya'ulhaq, 2406356782, HikariAkiraa
-4. Sakabudi Muhammad, 240683429, Rivenoxern
+4. Sakabudi Muhammad, 2406429683, Rivenoxern
 
 ## Building the Project
 

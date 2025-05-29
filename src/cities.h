@@ -6,10 +6,27 @@
 // Struct containing data for a city.
 typedef struct {
     char *name;
+
+    // In people.
     size_t population;
+
+    // In km^2.
     double area;
+
+    // In L/day.
+    double waterSupply;
+
+    // In number of schools.
+    size_t schools;
+
+    // In number of hospitals.
+    size_t hospitals;
+
     struct {
+        // In "units".
         size_t publicTransportation;
+
+        // In "units".
         size_t personalTransportation;
     } transportation;
 } City;

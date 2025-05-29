@@ -24,10 +24,10 @@ void pageCitySimulation(App *app, City *city) {
 
         // Print UI.
         printf("\033[1m--- CITY - SIMULATION ---\033[0m\n");
-        printf("1. Back\n\n");
-        printf("2. Simulate City\n");
-        printf("3. View logs\n\n");
-        printf("Choice: ");
+        printf("\033[91m1. Back\033[0m\n\n");
+        printf("\033[94m2. Simulate City\n");
+        printf("3. View logs\033[0m\n\n");
+        printf("\033[2mChoice: \033[0m");
 
         fgets(buffer, 128, stdin);
         sscanf(buffer, "%d", (int*)&choice);
@@ -72,7 +72,7 @@ void pageCitySimulation(App *app, City *city) {
 
                 //Save results confirmation
                 char save;
-                printf("Save it to log? (y/n): ");
+                printf("\nSave it to log? (y/n): ");
                 scanf(" %c", &save);
                 while (getchar() != '\n');
                 if (save == 'y' || save == 'Y') {
@@ -112,7 +112,7 @@ void pageCitySimulation(App *app, City *city) {
             }
             // View simulation logs.
             case 3:
-                printf("Simulation logs\n");
+                printf("\nSimulation logs\n");
                 FILE *f = fopen("simulation_logs.txt", "r");
                 if (f) {
                     char line[256];

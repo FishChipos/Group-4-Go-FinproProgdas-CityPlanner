@@ -21,10 +21,10 @@ void pageStart(App *app) {
 
         // Print UI.
         puts("\033[1m=== CITY PLANNER ===\033[0m");
-        puts("1. Start");
-        puts("2. Exit\n");
+        puts("\033[94m1. Start\033[0m");
+        puts("\033[91m2. Exit\033[0m\n");
 
-        printf("Choice: ");
+        printf("\033[2mChoice: \033[0m");
 
         // Get user choice.
         fgets(buffer, 128, stdin);

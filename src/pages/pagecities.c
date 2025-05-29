@@ -43,12 +43,12 @@ void pageCities(App *app) {
             case MODE_NORMAL:
                 // Print normal mode UI.
                 puts("\033[1m--- CITIES ---\033[0m");
-                puts("1. Back\n");
+                puts("\033[91m1. Back\033[0m\n");
 
                 puts("\033[1mACTIONS\033[0m");
-                puts("2. Add city");
+                puts("\033[94m2. Add city");
                 puts("3. Duplicate city");
-                puts("4. Delete city\n");
+                puts("4. Delete city\033[0m\n");
                 
                 puts("\033[1mYOUR CITIES\033[0m");
                 if (app->cities.count <= 0) {
@@ -57,14 +57,14 @@ void pageCities(App *app) {
                 }
                 else {
                     // Print city names.
-                    puts("Choose a city to view it");
+                    puts("Choose a city to view it\033[94m");
                     for (size_t cityIndex = 0; cityIndex < app->cities.count; cityIndex++) {
                         printf("%llu. %s\n", cityIndex + 4 + 1, app->cities.array[cityIndex].name);
                     }
-                    puts("");
+                    puts("\033[0m");
                 }
 
-                printf("Choice: ");
+                printf("\033[2mChoice: \033[0m");
 
                 // Get user input.
                 fgets(buffer, 128, stdin);
@@ -110,18 +110,18 @@ void pageCities(App *app) {
             case MODE_DUPLICATE:
                 // Print duplicate mode UI.
                 puts("\033[1m--- CITIES ---\033[0m");
-                puts("1. Exit duplicate mode.\n");
+                puts("\033[91m1. Exit duplicate mode.\033[0m\n");
 
                 if (app->cities.count > 0) {
-                    puts("Choose a city to \033[1;34mDUPLICATE\033[0m it");
+                    puts("Choose a city to \033[1;34mDUPLICATE\033[0m it\033[94m");
                     for (size_t cityIndex = 0; cityIndex < app->cities.count; cityIndex++) {
                         printf("%llu. %s\n", cityIndex + 1 + 1, app->cities.array[cityIndex].name);
                     }
     
-                    puts("");
+                    puts("\033[0m");
                 }
 
-                printf("Choice: ");
+                printf("\033[2mChoice: \033[0m");
                 
                 // Get user input.
                 fgets(buffer, 128, stdin);
@@ -148,18 +148,18 @@ void pageCities(App *app) {
             case MODE_DELETE:
                 // Print delete mode UI.
                 puts("\033[1m--- CITIES ---\033[0m");
-                puts("1. Exit delete mode.\n");
+                puts("\033[91m1. Exit delete mode.\033[0m\n");
                 
                 if (app->cities.count > 0) {
-                    puts("Choose a city to \033[1;31mDELETE\033[0m it");
+                    puts("Choose a city to \033[1;31mDELETE\033[0m it\033[94m");
                     for (size_t cityIndex = 0; cityIndex < app->cities.count; cityIndex++) {
                         printf("%llu. %s\n", cityIndex + 1 + 1, app->cities.array[cityIndex].name);
                     }
     
-                    puts("");
+                    puts("\033[0m");
                 }
 
-                printf("Choice: ");
+                printf("\033[2mChoice: \033[0m");
                 
                 // Get user input.
                 fgets(buffer, 128, stdin);

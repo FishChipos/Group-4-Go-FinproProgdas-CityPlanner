@@ -24,7 +24,8 @@ void addCity(Cities *cities, City city) {
 
 void deleteCity(Cities *cities, size_t index) {
     // If index is invalid, return.
-    if (index < 0 || index >= cities->count) {
+    // Since size_t is unsigned we don't need to check for negative indices.
+    if (index >= cities->count) {
         return;
     }
 

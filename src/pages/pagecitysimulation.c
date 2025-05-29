@@ -7,7 +7,7 @@
 
 #include "../systems/citysimulation.h"
 
-void pageCitySimulation(App *app, City *city) {
+void pageCitySimulation(City *city) {
     bool pageClosed = false;
     int choice;
     char buffer[128];

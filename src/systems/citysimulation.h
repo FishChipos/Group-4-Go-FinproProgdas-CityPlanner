@@ -2,6 +2,7 @@
 #define CITYSIMULATION_H
 
 #include <stddef.h>
+
 #include "cities.h"
 
 // Struct to store simulation results for each year

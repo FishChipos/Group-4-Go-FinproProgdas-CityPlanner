@@ -10,16 +10,16 @@ void pageStart(App *app);
 void pageCities(App *app);
 
 // Displays the page for a city.
-void pageCity(App *app, City *city);
+void pageCity(City *city);
 
 // Prints data for a city.
-void printCityData(App *app, City *city);
+void printCityData(City *city);
 
 // Displays the page for an evaluation of a city.
-void pageCityEvaluation(App *app, City *city);
+void pageCityEvaluation(City *city);
 
 // Displays the page for a simulation of a city.
-void pageCitySimulation(App *app, City *city);
+void pageCitySimulation(City *city);
 
 // Prints a prompt for invalid input and waits for user input.
 void promptInvalidInput();

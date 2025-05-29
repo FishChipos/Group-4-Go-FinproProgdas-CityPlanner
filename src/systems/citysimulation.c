@@ -1,4 +1,5 @@
 #include "citysimulation.h"
+
 #include <stdlib.h>
 
 CitySimulationResult* simulateCity(const City *city, int years, int *resultCount, double growthRate) {

@@ -5,7 +5,7 @@
 #include <string.h>
 
 // Prints the overall data for a city.
-void printCityData(App *app, City *city) {
+void printCityData(City *city) {
     printf("\033[1;5;92m%s\033[0m\n", city->name);
     printf("%-15s: %llu %s\n", "Population", city->population, city->population == 1 ? "person" : "people");
     printf("%-15s: %.2lf km^2\n", "Area", city->area);
@@ -16,7 +16,7 @@ void printCityData(App *app, City *city) {
 }
 
 // Displays subpage for city transportation data.
-void pageCityTransportation(App *app, City *city) {
+void pageCityTransportation(City *city) {
     bool pageShouldClose = false;
 
     while (!pageShouldClose) {
@@ -31,7 +31,7 @@ void pageCityTransportation(App *app, City *city) {
 
         // Print UI.
         puts("\033[1m--- CITY - TRANSPORTATION ---\033[0m");
-        printCityData(app, city);
+        printCityData(city);
 
         puts("");
         
@@ -77,7 +77,7 @@ void pageCityTransportation(App *app, City *city) {
 
 }
 
-void pageCity(App *app, City *city) {
+void pageCity(City *city) {
     bool pageShouldClose = false;
 
     while (!pageShouldClose) {
@@ -99,7 +99,7 @@ void pageCity(App *app, City *city) {
 
         // Print UI.
         puts("\033[1m--- CITY ---\033[0m");
-        printCityData(app, city);
+        printCityData(city);
 
         puts("");
 
@@ -141,11 +141,11 @@ void pageCity(App *app, City *city) {
                 break;
             case EVALUATION:
                 // Navigate to the evaluation page for this city.
-                pageCityEvaluation(app, city);
+                pageCityEvaluation(city);
                 break;
             case SIMULATION:
                 // Navigate to the simulation page for this city.
-                pageCitySimulation(app, city);
+                pageCitySimulation(city);
                 break;
             case POPULATION:
                 // Ask for new population.
@@ -161,7 +161,7 @@ void pageCity(App *app, City *city) {
                 break;
             case TRANSPORT:
                 // Navigate to the transportation subpage for this city.
-                pageCityTransportation(app, city);
+                pageCityTransportation(city);
                 break;
             case WATER:
                 // Ask for new water supply.

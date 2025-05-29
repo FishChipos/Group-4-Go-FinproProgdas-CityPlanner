@@ -8,7 +8,7 @@
 
 #include "../systems/cityevaluation.h"
 
-void pageCityEvaluation(App *app, City *city) {
+void pageCityEvaluation(City *city) {
     bool pageShouldClose = false;
 
     // In the future, probably figure out a cleaner way to do this,
@@ -25,7 +25,7 @@ void pageCityEvaluation(App *app, City *city) {
     double peoplePerSchool;
     double peoplePerHospital;
 
-    // Calculate scores.
+    // Calculate scores and store them in this struct.
     struct {
         double populationDensity;
         double publicTransportation;
@@ -63,7 +63,7 @@ void pageCityEvaluation(App *app, City *city) {
         // Print UI including evaluation results.
         printf("\033[1m--- CITY - EVALUATION ---\033[0m\n");
 
-        printCityData(app, city);
+        printCityData(city);
     
         printf("\nCity Population Density: %.2f people/km^2\n", populationDensity);
         printf("Score: %.2f\n\n", scores.populationDensity);

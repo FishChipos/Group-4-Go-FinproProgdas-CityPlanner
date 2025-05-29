@@ -98,7 +98,7 @@ void pageCities(App *app) {
                     default:
                         // If a city was chosen.
                         if (choice >= 5 && choice <= 5 + (unsigned int)app->cities.count - 1) {
-                            pageCity(app, &app->cities.array[choice - 5]);
+                            pageCity(&app->cities.array[choice - 5]);
                         }
                         // Otherwise it's invalid input.
                         else {
